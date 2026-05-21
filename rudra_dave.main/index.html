@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rudra J. Dave | Portfolio</title>
+
+    <!-- BOX ICONS -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="png" href="propertys/img/pefi.png">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- TYPED JS -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f7ff;
+            color: #222;
+            transition: 0.4s;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.3rem;
+            margin-bottom: 50px;
+            color: #2563eb;
+        }
+
+        /* HEADER */
+
+        header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+        }
+
+        .nav {
+            height: 75px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+        }
+
+        .logo {
+            font-family: "Dancing Script";
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .nav-list {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            position: relative;
+            color: #222;
+            font-weight: 500;
+            transition: 0.3s;
+            padding-bottom: 5px;
+        }
+
+        
+        .nav-link:hover {
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mode-btn {
+            padding: 8px 15px;
+            border: none;
+            background: #2563eb;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* HAMBURGER */
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            color: #2563eb;
+            cursor: pointer;
+        }
+
+        /* HOME */
+
+        .home {
+            min-height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 120px 10% 50px;
+            gap: 50px;
+        }
+
+        .home-title {
+            font-size: 3rem;
+            line-height: 1.4;
+        }
+
+        .home-title span {
+            color: #2563eb;
+        }
+
+        .typing {
+            color: #2563eb;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 15px;
+            min-height: 40px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #2563eb;
+            color: white;
+            border-radius: 10px;
+            transition: 0.3s;
+            margin-top: 25px;
+        }
+
+        .button:hover {
+            background: #1d4ed8;
+            transform: translateY(-3px);
+        }
+
+        .social-icons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            font-size: 1.6rem;
+            color: #2563eb;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px);
+        }
+
+        .home-img img {
+            width: 350px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ABOUT */
+
+        .about-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img img {
+            border-radius: 20px;
+            height: 400px;
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-text h2 {
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            line-height: 1.9;
+            color: #555;
+        }
+
+        /* SKILLS */
+
+        .skills-container {
+            display: grid;
+            gap: 25px;
+        }
+
+        .skill-box {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .skill-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 20px;
+        }
+
+        .skill-fill {
+            height: 10px;
+            background: #2563eb;
+            border-radius: 20px;
+        }
+
+        /* ACHIEVEMENTS */
+
+        .achievement-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .achievement-card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+            transition: 0.4s;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .achievement-card i {
+            font-size: 3rem;
+            color: #2563eb;
+            margin-bottom: 15px;
+        }
+
+        .achievement-card h3 {
+            margin-bottom: 10px;
+        }
+
+        /* PROJECTS */
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+            transition: 0.4s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .project-content p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* CONTACT */
+
+        .contact {
+            background: #f8f9ff;
+        }
+
+        .contact__container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .contact__container form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact__input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #dbe4ff;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .contact__input:focus {
+            border-color: #2563eb;
+        }
+
+        .contact__button {
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: #2563eb;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .contact__button:hover {
+            background: #1d4ed8;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .footer-icons {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-icons a {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* DARK MODE */
+
+        body.dark-mode {
+            background: #0f172a;
+            color: white;
+        }
+
+        body.dark-mode header,
+        body.dark-mode .skill-box,
+        body.dark-mode .project-card,
+        body.dark-mode .achievement-card {
+            background: #1e293b;
+            color: white;
+        }
+
+        body.dark-mode .about-text p,
+        body.dark-mode .project-content p {
+            color: #d1d5db;
+        }
+
+        body.dark-mode .nav-link {
+            color: white;
+        }
+
+        body.dark-mode .contact {
+            background: #0f172a;
+        }
+
+        body.dark-mode .contact__input {
+            background: #1e293b;
+            border: 2px solid #334155;
+            color: white;
+        }
+
+        /* RESPONSIVE */
+
+        @media screen and (max-width: 768px) {
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-list {
+                position: absolute;
+                top: 75px;
+                right: -100%;
+                width: 230px;
+                background: white;
+                flex-direction: column;
+                padding: 30px;
+                gap: 20px;
+                border-radius: 0 0 0 20px;
+                transition: 0.4s;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-list.active {
+                right: 0;
+            }
+
+            body.dark-mode .nav-list {
+                background: #1e293b;
+            }
+
+            .home {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .home-title {
+                font-size: 2.3rem;
+            }
+
+            .typing {
+                font-size: 1.2rem;
+            }
+
+            .home-img img {
+                width: 270px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <nav class="nav">
+
+            <a href="#" class="logo">Rudra J. Dave</a>
+
+            <div class="menu-toggle" id="menu-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+
+            <ul class="nav-list" id="nav-list">
+
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#achievement" class="nav-link">Achievement</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+
+            </ul>
+
+            <button class="mode-btn" id="mode-toggle">🌙</button>
+
+        </nav>
+
+    </header>
+
+    <!-- HOME -->
+
+    <section class="home" id="home">
+
+        <div class="home-data">
+
+            <h1 class="home-title">
+                Hi,<br>
+                I'm <span>Rudra</span>
+            </h1>
+
+            <div class="typing">
+                <span id="typed"></span>
+            </div>
+<a href="propertys/cv/resume.pdf" 
+   class="button" 
+   download="Rudra_Dave_Resume.pdf">
+  <i class='bx bx-download'></i>
+  Download Resume
+</a>
+
+
+
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/rudra-dave-841750378/"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://github.com/RJD1926"><i class='bx bxl-github'></i></a>
+                <a href="https://www.instagram.com/rudra_1926/"><i class='bx bxl-instagram'></i></a>
+            </div>
+
+        </div>
+
+        <div class="home-img">
+            <img src="propertys/img/pefi.png" alt="">
+        </div>
+
+    </section>
+
+    <!-- ABOUT -->
+
+    <section class="section" id="about">
+
+        <h2 class="section-title">About Me</h2>
+
+        <div class="about-container">
+
+            <div class="about-img">
+                <img src="propertys/img/about.png" alt="">
+            </div>
+
+            <div class="about-text">
+
+                <h2>I'am Rudra</h2>
+
+                <p>
+                    I am a passionate BCA student and aspiring .NET Full Stack Developer
+                    with strong skills in HTML, CSS, JavaScript and modern web design.
+                    I enjoy building creative and responsive websites.
+                    Alongside coding, I actively participate in karate and cricket,
+                    which improve my focus, discipline and teamwork.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SKILLS -->
+
+    <section class="section" id="skills">
+
+        <h2 class="section-title">Skills</h2>
+
+        <div class="skills-container">
+
+            <div class="skill-box">
+                <div class="skill-top">
+                    <span>HTML</span>
+                    <span>90%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-fill" style="width:90%"></div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <div class="skill-top">
+                    <span>CSS</span>
+                    <span>85%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-fill" style="width:85%"></div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <div class="skill-top">
+                    <span>JavaScript</span>
+                    <span>75%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-fill" style="width:75%"></div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <div class="skill-top">
+                    <span>.NET</span>
+                    <span>70%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-fill" style="width:70%"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+
+    <section class="section" id="achievement">
+
+        <h2 class="section-title">Achievements</h2>
+
+        <div class="achievement-container">
+
+            <div class="achievement-card">
+                <i class='bx bx-medal'></i>
+                <h3>Purple Belt</h3>
+                <p>Achieved Purple Belt in Karate.</p>
+            </div>
+
+            <div class="achievement-card">
+                <i class='bx bx-code-alt'></i>
+                <h3>Web Developer</h3>
+                <p>Built multiple responsive websites.</p>
+            </div>
+
+            <div class="achievement-card">
+                <i class='bx bx-data'></i>
+                <h3>Data Drill</h3>
+                <p>Secured Second Rank in Inter-College Competition “Data Drill” 
+using Python Programming at C.K. Pithawala College, Surat.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PROJECTS -->
+
+    <section class="section" id="projects">
+
+        <h2 class="section-title">Projects</h2>
+
+        <div class="projects-container">
+
+            <div class="project-card">
+                <a href="https://forceai-webbulider.netlify.app/" target="_blank">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+                    alt="">
+
+                <div class="project-content">
+                    <h3>Ai Website Bulider</h3>
+                    <p>Responsive ai website bulider using HTML, CSS and JavaScript.</p>
+                </div>
+</a>
+            </div>
+
+           
+            <div class="project-card">
+                 <a href="https://shreebhoomi.netlify.app/" target="_blank">
+                <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4"
+                    alt="">
+               
+                <div class="project-content">
+                    <h3>Shree Bhoomi Framer Helper</h3>
+                    <p>Assisted in website design and development using Framer for Shree Bhumi projects.</p>
+                </div>
+</a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section class="contact section" id="contact">
+
+        <h2 class="section-title">Contact</h2>
+
+        <div class="contact__container">
+
+            <form action="https://api.web3forms.com/submit" method="POST">
+
+                <input type="hidden" name="access_key"
+                    value="744764c8-5d3f-4a46-9332-64a521382181">
+
+                <input type="text" class="contact__input"
+                    placeholder="Enter Your Name" name="name" required>
+
+                <input type="email" class="contact__input"
+                    placeholder="Enter Your Email" name="email" required>
+
+                <textarea name="message" rows="10"
+                    class="contact__input"
+                    placeholder="Enter Your Message"
+                    required></textarea>
+
+                <input type="checkbox" name="botcheck"
+                    style="display:none;">
+
+                <input type="submit"
+                    value="Submit"
+                    class="contact__button">
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h2>Rudra J. Dave</h2>
+
+        <div class="footer-icons">
+            <a href="https://www.linkedin.com/in/rudra-dave-841750378/"><i class='bx bxl-linkedin'></i></a>
+            <a href="https://github.com/RJD1926"><i class='bx bxl-github'></i></a>
+            <a href="https://www.instagram.com/rudra_1926/"><i class='bx bxl-instagram'></i></a>
+        </div>
+
+        <p>© 2026 Rudra J. Dave | All Rights Reserved</p>
+
+    </footer>
+
+    <!-- SCRIPT -->
+
+    <script>
+
+        /* DARK MODE */
+
+        const toggle = document.getElementById("mode-toggle");
+
+        toggle.addEventListener("click", () => {
+
+            document.body.classList.toggle("dark-mode");
+
+            if (document.body.classList.contains("dark-mode")) {
+                toggle.innerHTML = "☀️";
+            } else {
+                toggle.innerHTML = "🌙";
+            }
+
+        });
+
+        /* TYPING EFFECT */
+
+        var typed = new Typed("#typed", {
+
+            strings: [
+                "BCA Student.",
+                "FullStack .NET Developer.",
+                "Karate Practitioner.",
+                "Purple Belt in Shotoken Karate.",
+                "prompt Engineer."
+            ],
+
+            typeSpeed: 70,
+            backSpeed: 50,
+            backDelay: 1500,
+            loop: true
+
+        });
+
+        /* HAMBURGER MENU */
+
+        const menuToggle = document.getElementById("menu-toggle");
+        const navList = document.getElementById("nav-list");
+
+        menuToggle.addEventListener("click", () => {
+
+            navList.classList.toggle("active");
+
+            if (navList.classList.contains("active")) {
+                menuToggle.innerHTML = "<i class='bx bx-x'></i>";
+            } else {
+                menuToggle.innerHTML = "<i class='bx bx-menu'></i>";
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
