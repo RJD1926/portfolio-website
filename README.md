@@ -1,6 +1,6 @@
 # <div align="center">
 
-<img src="https://rudradavee.netlify.app/propertys/img/logo.png" alt="Rudra Dave Logo" width="180"/>
+<img src="[https://rudradavee.netlify.app/propertys/img/logo.png](https://rudradavee.netlify.app/propertys/img/logo.png)" alt="Rudra Dave Logo" width="180"/>
 
 # 🚀 Rudra Dave Portfolio Website
 
