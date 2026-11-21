@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="google-site-verification" content="pbeFZMepdGE6WrRwy8MNnVY1tmroypjhUMk0UQwPiSM"/>
 <title>The Rudra Gazette — Blog</title>
 <link rel="shortcut icon" href="propertys/img/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -128,19 +129,19 @@ body.cursor-hover .c-ring { width: 52px; height: 52px; border-color: rgba(228,21
 /* ════ HEADER / NAV ════ */
 header { position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-h); z-index: 1000; transition: background .4s, border-color .4s; }
 header.scrolled { background: rgba(26,18,8,.94); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 4px 40px rgba(0,0,0,.6); }
-nav { max-width: 1280px; margin: auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; }
-.logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 900; color: var(--parchment); letter-spacing: 2px; font-style: italic; display: flex; align-items: center; gap: 10px; }
+nav { max-width: 1520px; margin: auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; gap: 20px; }
+.logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 900; color: var(--parchment); letter-spacing: 2px; font-style: italic; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .logo-seal { width: 34px; height: 34px; border: 1.5px solid var(--copper); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-style: normal; transition: .3s; overflow: hidden; }
 .logo-seal img { width: 100%; height: 100%; object-fit: cover; }
 .logo:hover .logo-seal { border-color: var(--parchment); }
 .logo span { color: var(--copper); }
-.nav-links { display: flex; gap: 24px; }
-.nav-link { font-family: var(--font-stamp); font-size: .78rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); position: relative; padding: 4px 0; transition: color .25s; }
-.nav-link .nl-num { font-family: var(--font-mono); font-size: .58rem; color: var(--copper); margin-right: 4px; opacity: .7; }
+.nav-links { display: flex; gap: clamp(14px, 1.8vw, 32px); align-items: center; }
+.nav-link { font-family: var(--font-stamp); font-size: .74rem; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); position: relative; padding: 6px 4px; transition: color .25s; white-space: nowrap; }
+.nav-link .nl-num { font-family: var(--font-mono); font-size: .56rem; color: var(--copper); margin-right: 5px; opacity: .7; }
 .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; height: 1px; width: 0%; background: var(--copper); transition: width .3s; }
 .nav-link:hover, .nav-link.active { color: var(--parchment); }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-right { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
 .nav-cta { display: inline-flex; align-items: center; gap: 7px; padding: 9px 22px; border-radius: var(--radius); border: 1.5px solid var(--copper); background: transparent; color: var(--copper); font-family: var(--font-stamp); font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; cursor: none; transition: .3s; position: relative; overflow: hidden; }
 .nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--copper); transform: translateY(101%); transition: transform .3s cubic-bezier(.4,0,.2,1); }
 .nav-cta span { position: relative; z-index: 1; }
@@ -154,10 +155,10 @@ nav { max-width: 1280px; margin: auto; height: 100%; display: flex; align-items:
 .btn-ham.open span:nth-child(2) { opacity: 0; }
 .btn-ham.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-@media(max-width:900px) {
-  .nav-links { position: fixed; top: var(--nav-h); right: -100%; width: min(300px,85vw); height: calc(100vh - var(--nav-h)); background: var(--ink2); flex-direction: column; gap: 0; border-left: 1px solid var(--border); transition: right .4s cubic-bezier(.4,0,.2,1); }
+@media(max-width:1160px) {
+  .nav-links { position: fixed; top: var(--nav-h); right: -100%; width: min(320px,85vw); height: calc(100vh - var(--nav-h)); background: var(--ink2); flex-direction: column; gap: 0; border-left: 1px solid var(--border); transition: right .4s cubic-bezier(.4,0,.2,1); overflow-y: auto; padding-bottom: 30px; }
   .nav-links.open { right: 0; }
-  .nav-link { display: block; padding: 18px 32px; font-size: .9rem; }
+  .nav-link { display: block; padding: 16px 28px; font-size: .88rem; }
   .nav-link::after { display: none; }
   .btn-ham { display: flex; }
   .nav-cta { display: none; }
@@ -495,13 +496,15 @@ footer { background: var(--ink); border-top: 1px solid var(--border); position: 
       <span>Rudra <span>Dave</span></span>
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a class='nav-link' href='/#home'><span class="nl-num">01.</span>Home</a></li>
-      <li><a class='nav-link' href='/#about'><span class="nl-num">02.</span>About</a></li>
-      <li><a class='nav-link' href='/#skills'><span class="nl-num">03.</span>Skills</a></li>
-      <li><a class='nav-link' href='/#achievements'><span class="nl-num">04.</span>Wins</a></li>
-      <li><a class='nav-link' href='/#projects'><span class="nl-num">05.</span>Work</a></li>
-      <li><a class='nav-link active' href='/blog'><span class="nl-num">06.</span>Blog</a></li>
-      <li><a class='nav-link' href='/#contact'><span class="nl-num">07.</span>Contact</a></li>
+      <li><a class='nav-link' href='index.html#home'><span class="nl-num">01.</span>Home</a></li>
+      <li><a class='nav-link' href='index.html#about'><span class="nl-num">02.</span>About</a></li>
+      <li><a class='nav-link' href='index.html#skills'><span class="nl-num">03.</span>Skills</a></li>
+      <li><a class='nav-link' href='index.html#achievements'><span class="nl-num">04.</span>Wins</a></li>
+      <li><a class='nav-link' href='index.html#projects'><span class="nl-num">05.</span>Work</a></li>
+      <li><a class='nav-link' href='index.html#experience'><span class="nl-num">06.</span>Experience</a></li>
+      <li><a class='nav-link' href='index.html#client-work'><span class="nl-num">07.</span>Client Work</a></li>
+      <li><a class='nav-link active' href='blog.html'><span class="nl-num">08.</span>Blog</a></li>
+      <li><a class='nav-link' href='index.html#contact'><span class="nl-num">09.</span>Contact</a></li>
     </ul>
     <div class="nav-right">
       <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">☀️</button>

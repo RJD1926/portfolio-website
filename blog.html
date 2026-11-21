@@ -1,14 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="google-site-verification" content="pbeFZMepdGE6WrRwy8MNnVY1tmroypjhUMk0UQwPiSM"/>
 <title>The Rudra Gazette — Blog</title>
 <link rel="shortcut icon" href="propertys/img/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/dist/boxicons.js" integrity="sha512-Dm5UxqUSgNd93XG7eseoOrScyM1BVs65GrwmavP0D0DujOA8mjiBfyj71wmI2VQZKnnZQsSWWsxDKNiQIqk8sQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"/>
 <style>
 /* ════════════════════════════════════════
    RETRO DESIGN TOKENS — same as index.html
@@ -125,19 +129,19 @@ body.cursor-hover .c-ring { width: 52px; height: 52px; border-color: rgba(228,21
 /* ════ HEADER / NAV ════ */
 header { position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-h); z-index: 1000; transition: background .4s, border-color .4s; }
 header.scrolled { background: rgba(26,18,8,.94); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); box-shadow: 0 4px 40px rgba(0,0,0,.6); }
-nav { max-width: 1280px; margin: auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; }
-.logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 900; color: var(--parchment); letter-spacing: 2px; font-style: italic; display: flex; align-items: center; gap: 10px; }
+nav { max-width: 1520px; margin: auto; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; gap: 20px; }
+.logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 900; color: var(--parchment); letter-spacing: 2px; font-style: italic; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .logo-seal { width: 34px; height: 34px; border: 1.5px solid var(--copper); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-style: normal; transition: .3s; overflow: hidden; }
 .logo-seal img { width: 100%; height: 100%; object-fit: cover; }
 .logo:hover .logo-seal { border-color: var(--parchment); }
 .logo span { color: var(--copper); }
-.nav-links { display: flex; gap: 24px; }
-.nav-link { font-family: var(--font-stamp); font-size: .78rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); position: relative; padding: 4px 0; transition: color .25s; }
-.nav-link .nl-num { font-family: var(--font-mono); font-size: .58rem; color: var(--copper); margin-right: 4px; opacity: .7; }
+.nav-links { display: flex; gap: clamp(14px, 1.8vw, 32px); align-items: center; }
+.nav-link { font-family: var(--font-stamp); font-size: .74rem; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); position: relative; padding: 6px 4px; transition: color .25s; white-space: nowrap; }
+.nav-link .nl-num { font-family: var(--font-mono); font-size: .56rem; color: var(--copper); margin-right: 5px; opacity: .7; }
 .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; height: 1px; width: 0%; background: var(--copper); transition: width .3s; }
 .nav-link:hover, .nav-link.active { color: var(--parchment); }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-right { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
 .nav-cta { display: inline-flex; align-items: center; gap: 7px; padding: 9px 22px; border-radius: var(--radius); border: 1.5px solid var(--copper); background: transparent; color: var(--copper); font-family: var(--font-stamp); font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; cursor: none; transition: .3s; position: relative; overflow: hidden; }
 .nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--copper); transform: translateY(101%); transition: transform .3s cubic-bezier(.4,0,.2,1); }
 .nav-cta span { position: relative; z-index: 1; }
@@ -151,10 +155,10 @@ nav { max-width: 1280px; margin: auto; height: 100%; display: flex; align-items:
 .btn-ham.open span:nth-child(2) { opacity: 0; }
 .btn-ham.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-@media(max-width:900px) {
-  .nav-links { position: fixed; top: var(--nav-h); right: -100%; width: min(300px,85vw); height: calc(100vh - var(--nav-h)); background: var(--ink2); flex-direction: column; gap: 0; border-left: 1px solid var(--border); transition: right .4s cubic-bezier(.4,0,.2,1); }
+@media(max-width:1160px) {
+  .nav-links { position: fixed; top: var(--nav-h); right: -100%; width: min(320px,85vw); height: calc(100vh - var(--nav-h)); background: var(--ink2); flex-direction: column; gap: 0; border-left: 1px solid var(--border); transition: right .4s cubic-bezier(.4,0,.2,1); overflow-y: auto; padding-bottom: 30px; }
   .nav-links.open { right: 0; }
-  .nav-link { display: block; padding: 18px 32px; font-size: .9rem; }
+  .nav-link { display: block; padding: 16px 28px; font-size: .88rem; }
   .nav-link::after { display: none; }
   .btn-ham { display: flex; }
   .nav-cta { display: none; }
@@ -313,6 +317,156 @@ footer { background: var(--ink); border-top: 1px solid var(--border); position: 
   #chat-window { width: calc(100vw - 32px); right: 16px; bottom: 88px; }
   #chat-toggle { right: 16px; bottom: 20px; }
 }
+
+/* ════ RETRO ARCADE WIDGET (inlined) ════ */
+/* ════════════════════════════════════════
+   RETRO ARCADE WIDGET (left side, pairs with chatbot)
+════════════════════════════════════════ */
+#games-toggle {
+  position: fixed; bottom: 28px; left: 28px; z-index: 2000;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--ink2); border: 1.5px solid var(--copper);
+  color: var(--copper); font-size: 1.35rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none; box-shadow: 0 8px 24px rgba(0,0,0,.5);
+  transition: transform .25s, box-shadow .25s, background .25s, color .25s;
+}
+#games-toggle:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 12px 30px rgba(0,0,0,.55); }
+#games-toggle.open { background: var(--copper); color: var(--ink); border-color: var(--copper2); }
+
+@keyframes bx-wiggle-play {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-14deg); }
+  75% { transform: rotate(14deg); }
+}
+.bx-wiggle { animation: bx-wiggle-play 1.6s ease-in-out infinite; }
+
+#games-window {
+  position: fixed; bottom: 96px; left: 28px; z-index: 2000;
+  width: 300px; max-height: 460px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,.55);
+  display: flex; flex-direction: column; overflow: hidden;
+  opacity: 0; visibility: hidden; transform: translateY(16px) scale(.97);
+  transition: opacity .25s, transform .25s, visibility .25s;
+}
+#games-window.open { opacity: 1; visibility: visible; transform: none; }
+
+.games-head {
+  padding: 14px 16px; background: var(--ink2); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.games-head i { color: var(--copper); font-size: 1rem; }
+.games-head span { font-family: var(--font-stamp); font-size: .78rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--parchment); }
+
+.games-list { padding: 12px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+.game-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px; border: 1px solid var(--border2); border-radius: var(--radius);
+  background: var(--card2); transition: border-color .2s, background .2s;
+}
+.game-item:hover { border-color: var(--copper); background: var(--card3, var(--card2)); }
+.game-item i { font-size: 1.5rem; color: var(--copper); flex-shrink: 0; }
+.game-item-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.game-name { font-family: var(--font-stamp); font-size: .78rem; letter-spacing: .5px; color: var(--text2); }
+.game-desc { font-family: var(--font-mono); font-size: .65rem; color: var(--muted2); margin-top: 2px; }
+.game-play-btn {
+  font-family: var(--font-mono); font-size: .62rem; letter-spacing: 1px;
+  color: var(--ink); background: var(--copper); border: none;
+  padding: 7px 10px; border-radius: 20px; cursor: none; transition: .2s; flex-shrink: 0;
+}
+.game-play-btn:hover { background: var(--copper2); }
+
+/* ── Fullscreen game overlay ── */
+#game-overlay {
+  position: fixed; inset: 0; z-index: 3000;
+  background: rgba(10,7,3,.88);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s;
+}
+#game-overlay.open { opacity: 1; visibility: visible; }
+
+.game-stage {
+  background: var(--card); border: 1px solid var(--copper);
+  border-radius: var(--radius); box-shadow: 0 25px 70px rgba(0,0,0,.6);
+  width: min(94vw, 520px);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.game-stage-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: var(--ink2); border-bottom: 1px solid var(--border);
+  font-family: var(--font-stamp); letter-spacing: 1px; color: var(--parchment);
+  font-size: .8rem; text-transform: uppercase;
+}
+#gameScore { color: var(--copper); font-family: var(--font-mono); font-size: .75rem; }
+#gameClose {
+  background: transparent; border: 1px solid var(--border); color: var(--text2);
+  width: 28px; height: 28px; border-radius: 50%; cursor: none;
+  display: flex; align-items: center; justify-content: center; transition: .2s;
+}
+#gameClose:hover { border-color: var(--copper); color: var(--copper); }
+
+#gameCanvas {
+  display: block; width: 100%; height: auto; background: var(--ink);
+  image-rendering: pixelated;
+}
+
+.game-stage-foot {
+  padding: 10px 16px; font-family: var(--font-mono); font-size: .65rem;
+  color: var(--muted2); text-align: center; border-top: 1px solid var(--border2);
+  letter-spacing: .5px;
+}
+
+.game-msg-layer {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  color: var(--parchment); font-family: var(--font-stamp); gap: 14px;
+  background: rgba(10,7,3,.55);
+}
+.game-msg-layer h3 { font-size: 1.3rem; letter-spacing: 1px; }
+.game-msg-layer p { font-family: var(--font-mono); font-size: .7rem; color: var(--text2); max-width: 260px; }
+.game-msg-layer button {
+  font-family: var(--font-mono); font-size: .7rem; letter-spacing: 1px;
+  color: var(--ink); background: var(--copper); border: none;
+  padding: 9px 18px; border-radius: 20px; cursor: none;
+}
+.game-canvas-wrap { position: relative; }
+.game-canvas-wrap.hidden-canvas #gameCanvas { visibility: hidden; }
+
+/* ── On-screen touch controls (shown only on touch devices) ── */
+.mc-panel {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; gap: 12px; border-top: 1px solid var(--border2);
+  background: var(--ink2);
+}
+.mc-btn {
+  -webkit-tap-highlight-color: transparent; touch-action: none; user-select: none;
+  background: var(--card2); border: 1px solid var(--border); color: var(--copper);
+  border-radius: var(--radius); display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: .95rem; transition: background .1s, border-color .1s;
+}
+.mc-btn:active, .mc-btn.mc-active { background: var(--copper); color: var(--ink); border-color: var(--copper2); }
+.mc-dpad { display: grid; grid-template-columns: repeat(3, 42px); grid-template-rows: repeat(2, 42px); gap: 4px; margin: 0 auto; }
+.mc-dpad .mc-up { grid-column: 2; grid-row: 1; }
+.mc-dpad .mc-left { grid-column: 1; grid-row: 2; }
+.mc-dpad .mc-right { grid-column: 3; grid-row: 2; }
+.mc-dpad .mc-down { grid-column: 2; grid-row: 2; }
+.mc-dpad i { font-size: 1.3rem; }
+.mc-row { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 12px; }
+.mc-side { display: flex; gap: 8px; }
+.mc-wide { width: 52px; height: 44px; }
+.mc-wide i { font-size: 1.3rem; }
+.mc-fire, .mc-jump {
+  width: 84px; height: 48px; font-size: .72rem; letter-spacing: 1px;
+  background: var(--copper); color: var(--ink); border-color: var(--copper2);
+}
+.mc-jump { width: 100%; }
+
+@media (max-width: 480px) {
+  #games-window { width: calc(100vw - 32px); left: 16px; bottom: 88px; }
+  #games-toggle { left: 16px; bottom: 20px; }
+}
+
 </style>
 </head>
 <body>
@@ -337,18 +491,20 @@ footer { background: var(--ink); border-top: 1px solid var(--border); position: 
 <!-- HEADER -->
 <header id="site-header">
   <nav>
-    <a href="index.html" class="logo">
+    <a class='logo' href='/'>
       <div class="logo-seal"><img src="propertys/img/logo.png" alt="Rudra Dave"/></div>
       <span>Rudra <span>Dave</span></span>
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html#home" class="nav-link"><span class="nl-num">01.</span>Home</a></li>
-      <li><a href="index.html#about" class="nav-link"><span class="nl-num">02.</span>About</a></li>
-      <li><a href="index.html#skills" class="nav-link"><span class="nl-num">03.</span>Skills</a></li>
-      <li><a href="index.html#achievements" class="nav-link"><span class="nl-num">04.</span>Wins</a></li>
-      <li><a href="index.html#projects" class="nav-link"><span class="nl-num">05.</span>Work</a></li>
-      <li><a href="blog.html" class="nav-link active"><span class="nl-num">06.</span>Blog</a></li>
-      <li><a href="index.html#contact" class="nav-link"><span class="nl-num">07.</span>Contact</a></li>
+      <li><a class='nav-link' href='index.html#home'><span class="nl-num">01.</span>Home</a></li>
+      <li><a class='nav-link' href='index.html#about'><span class="nl-num">02.</span>About</a></li>
+      <li><a class='nav-link' href='index.html#skills'><span class="nl-num">03.</span>Skills</a></li>
+      <li><a class='nav-link' href='index.html#achievements'><span class="nl-num">04.</span>Wins</a></li>
+      <li><a class='nav-link' href='index.html#projects'><span class="nl-num">05.</span>Work</a></li>
+      <li><a class='nav-link' href='index.html#experience'><span class="nl-num">06.</span>Experience</a></li>
+      <li><a class='nav-link' href='index.html#client-work'><span class="nl-num">07.</span>Client Work</a></li>
+      <li><a class='nav-link active' href='blog.html'><span class="nl-num">08.</span>Blog</a></li>
+      <li><a class='nav-link' href='index.html#contact'><span class="nl-num">09.</span>Contact</a></li>
     </ul>
     <div class="nav-right">
       <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">☀️</button>
@@ -411,12 +567,49 @@ footer { background: var(--ink); border-top: 1px solid var(--border); position: 
 <footer>
   <div class="footer-bottom">
     <p>© Rudra J. Dave — All Rights Reserved</p>
-    <p class="made-with">Crafted with <span>♥</span> & <span>old ink</span> · <a href="index.html" style="color:var(--copper)">Back to Portfolio</a></p>
+    <p class="made-with">Crafted with <span>♥</span> & <span>old ink</span> · <a href='/' style='color:var(--copper)'>Back to Portfolio</a></p>
   </div>
 </footer>
 
 <!-- CHATBOT WIDGET (rule-based, no API) -->
 <button id="chat-toggle" aria-label="Open chat assistant"><i class="fa-brands fa-d-and-d"></i></button>
+<button id="games-toggle" aria-label="Open retro games arcade"><i class="fa-solid fa-gamepad"></i></button>
+<div id="games-window">
+  <div class="games-head"><i class='bx bx-joystick'></i><span>Retro Arcade</span></div>
+  <div class="games-list">
+    <div class="game-item" data-game="pacman">
+      <i class="fa-solid fa-ghost"></i>
+      <div class="game-item-info"><span class="game-name">Pac-Man</span><span class="game-desc">Classic dot-muncher</span></div>
+      <button class="game-play-btn">PLAY</button>
+    </div>
+    <div class="game-item" data-game="shooter">
+      <i class='bx bx-rocket'></i>
+      <div class="game-item-info"><span class="game-name">Space Shooter</span><span class="game-desc">Blast the invaders</span></div>
+      <button class="game-play-btn">PLAY</button>
+    </div>
+    <div class="game-item" data-game="mario">
+      <i class='bx bx-run'></i>
+      <div class="game-item-info"><span class="game-name">Super Runner</span><span class="game-desc">Jump &amp; collect coins</span></div>
+      <button class="game-play-btn">PLAY</button>
+    </div>
+  </div>
+</div>
+
+<div id="game-overlay">
+  <div class="game-stage">
+    <div class="game-stage-head">
+      <span id="gameTitle">GAME</span>
+      <span id="gameScore">Score: 0</span>
+      <button id="gameClose"><i class='bx bx-x'></i></button>
+    </div>
+    <div class="game-canvas-wrap">
+      <canvas id="gameCanvas" width="480" height="360"></canvas>
+    </div>
+    <div class="mc-panel" id="mcPanel" style="display:none;"></div>
+    <div class="game-stage-foot" id="gameHint">Use arrow keys</div>
+  </div>
+</div>
+
 <div id="chat-window">
   <div class="chat-head"><i class="fa-brands fa-d-and-d"></i><span>Ask the Gazette</span></div>
   <div class="chat-body" id="chatBody">
@@ -1069,6 +1262,500 @@ drawBG();
     setTimeout(() => addMsg(reply(text), 'bot'), 350);
   }));
 })();
+</script>
+<script>
+/* ════════════════════════════════════════
+   RETRO ARCADE WIDGET — Pac-Man, Space Shooter, Super Runner
+   Vanilla canvas games + synthesized 8-bit sound effects (Web Audio API,
+   no external audio files needed).
+════════════════════════════════════════ */
+(function () {
+  "use strict";
+
+  /* ---------- SFX (real files from audio/, auto-falls back to a
+     synthesized 8-bit beep via Web Audio if a file is missing) ---------- */
+  const SFX = (function () {
+    const FOLDER = 'audio/';
+    const FILES = {
+      chomp: 'chomp.mp3', pacmanhit: 'pacman-hit.mp3', win: 'win.mp3',
+      shoot: 'shoot.mp3', explode: 'explode.mp3', shooterhit: 'shooter-hit.mp3',
+      jump: 'jump.mp3', coin: 'coin.mp3', runnerhit: 'runner-hit.mp3',
+      gameover: 'gameover.mp3', click: 'click.mp3',
+    };
+    const failed = {}; // keys that 404'd, so we stop retrying the file and just use the beep
+
+    let ctx;
+    function ac() { if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)(); return ctx; }
+    function tone(freq, dur, type, vol, delay) {
+      try {
+        const c = ac(); const t0 = c.currentTime + (delay || 0);
+        const osc = c.createOscillator(); const gain = c.createGain();
+        osc.type = type || 'square'; osc.frequency.setValueAtTime(freq, t0);
+        gain.gain.setValueAtTime((vol || .12), t0);
+        gain.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+        osc.connect(gain); gain.connect(c.destination);
+        osc.start(t0); osc.stop(t0 + dur);
+      } catch (e) { /* audio blocked until user gesture; ignore */ }
+    }
+    const FALLBACK = {
+      chomp:     () => tone(220 + Math.random() * 80, .06, 'square', .08),
+      pacmanhit: () => { tone(160, .25, 'sawtooth', .12); tone(90, .3, 'sawtooth', .1, .08); },
+      win:       () => [0, .1, .2, .3].forEach((d, i) => tone(440 + i * 110, .15, 'square', .1, d)),
+      shoot:     () => tone(880, .07, 'square', .07),
+      explode:   () => { tone(140, .2, 'sawtooth', .12); tone(70, .25, 'sawtooth', .1, .05); },
+      shooterhit:() => { tone(160, .25, 'sawtooth', .12); tone(90, .3, 'sawtooth', .1, .08); },
+      jump:      () => tone(300, .12, 'triangle', .1),
+      coin:      () => { tone(988, .08, 'square', .09); tone(1318, .12, 'square', .09, .07); },
+      runnerhit: () => { tone(160, .25, 'sawtooth', .12); tone(90, .3, 'sawtooth', .1, .08); },
+      gameover:  () => [0, .12, .24].reverse().forEach((d, i) => tone(220 - i * 40, .18, 'sawtooth', .1, d)),
+      click:     () => tone(600, .04, 'square', .05),
+    };
+
+    function playFile(key) {
+      if (failed[key]) { FALLBACK[key](); return; }
+      try {
+        const audio = new Audio(FOLDER + FILES[key]);
+        audio.volume = .6;
+        audio.addEventListener('error', () => { failed[key] = true; FALLBACK[key](); }, { once: true });
+        const p = audio.play();
+        if (p && p.catch) p.catch(() => { failed[key] = true; FALLBACK[key](); });
+      } catch (e) { failed[key] = true; FALLBACK[key](); }
+    }
+
+    // Browsers keep a fresh AudioContext "suspended" (silent, no error) until
+    // it's resumed inside a real user gesture. Call this on the first click.
+    function unlock() {
+      try {
+        const c = ac();
+        if (c.state === 'suspended') c.resume();
+      } catch (e) { /* ignore */ }
+    }
+
+    return {
+      chomp:      () => playFile('chomp'),
+      hit:        (kind) => playFile((kind || 'pacman') + 'hit'),
+      win:        () => playFile('win'),
+      shoot:      () => playFile('shoot'),
+      explode:    () => playFile('explode'),
+      jump:       () => playFile('jump'),
+      coin:       () => playFile('coin'),
+      gameover:   () => playFile('gameover'),
+      click:      () => playFile('click'),
+      unlock,
+    };
+  })();
+
+  /* ---------- DOM refs ---------- */
+  const toggle   = document.getElementById('games-toggle');
+  const win      = document.getElementById('games-window');
+  const overlay  = document.getElementById('game-overlay');
+  const canvas   = document.getElementById('gameCanvas');
+  const ctx      = canvas.getContext('2d');
+  const titleEl  = document.getElementById('gameTitle');
+  const scoreEl  = document.getElementById('gameScore');
+  const hintEl   = document.getElementById('gameHint');
+  const closeBtn = document.getElementById('gameClose');
+  const stageWrap = document.querySelector('.game-canvas-wrap');
+  const mcPanel  = document.getElementById('mcPanel');
+  const isTouch  = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+  if (!toggle) return; // widget markup not present on this page
+
+  toggle.addEventListener('click', () => {
+    SFX.unlock();
+    win.classList.toggle('open');
+    toggle.classList.toggle('open');
+    SFX.click();
+  });
+
+  document.querySelectorAll('.game-item').forEach(item => {
+    item.querySelector('.game-play-btn').addEventListener('click', () => {
+      SFX.click();
+      win.classList.remove('open'); toggle.classList.remove('open');
+      launchGame(item.dataset.game);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeGame);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeGame(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeGame(); });
+
+  let currentGame = null;
+  let rafId = null;
+  const keys = {};
+  function onKeyDown(e) { keys[e.key] = true; if (currentGame && currentGame.onKeyDown) currentGame.onKeyDown(e); }
+  function onKeyUp(e) { keys[e.key] = false; if (currentGame && currentGame.onKeyUp) currentGame.onKeyUp(e); }
+
+  /* ---------- On-screen touch controls (phones/tablets) ---------- */
+  const MC_TEMPLATES = {
+    pacman: '<div class="mc-dpad">' +
+      '<button class="mc-btn mc-up" data-key="ArrowUp"><i class="bx bx-chevron-up"></i></button>' +
+      '<button class="mc-btn mc-left" data-key="ArrowLeft"><i class="bx bx-chevron-left"></i></button>' +
+      '<button class="mc-btn mc-right" data-key="ArrowRight"><i class="bx bx-chevron-right"></i></button>' +
+      '<button class="mc-btn mc-down" data-key="ArrowDown"><i class="bx bx-chevron-down"></i></button>' +
+      '</div>',
+    shooter: '<div class="mc-row">' +
+      '<div class="mc-side">' +
+      '<button class="mc-btn mc-wide" data-key="ArrowLeft"><i class="bx bx-chevron-left"></i></button>' +
+      '<button class="mc-btn mc-wide" data-key="ArrowRight"><i class="bx bx-chevron-right"></i></button>' +
+      '</div>' +
+      '<button class="mc-btn mc-fire" data-key=" ">FIRE</button>' +
+      '</div>',
+    mario: '<div class="mc-row"><button class="mc-btn mc-jump" data-key=" ">JUMP</button></div>',
+  };
+
+  function showControls(gameKey) {
+    if (!isTouch || !MC_TEMPLATES[gameKey]) { mcPanel.style.display = 'none'; mcPanel.innerHTML = ''; return; }
+    mcPanel.innerHTML = MC_TEMPLATES[gameKey];
+    mcPanel.style.display = 'flex';
+    mcPanel.querySelectorAll('.mc-btn').forEach(btn => {
+      const k = btn.dataset.key;
+      const down = e => { e.preventDefault(); keys[k] = true; btn.classList.add('mc-active'); };
+      const up = e => { if (e) e.preventDefault(); keys[k] = false; btn.classList.remove('mc-active'); };
+      btn.addEventListener('pointerdown', down);
+      btn.addEventListener('pointerup', up);
+      btn.addEventListener('pointerleave', up);
+      btn.addEventListener('pointercancel', up);
+    });
+  }
+  function hideControls() { mcPanel.style.display = 'none'; mcPanel.innerHTML = ''; }
+
+  function showMsgLayer(html) {
+    let layer = stageWrap.querySelector('.game-msg-layer');
+    if (layer) layer.remove();
+    layer = document.createElement('div');
+    layer.className = 'game-msg-layer';
+    layer.innerHTML = html;
+    stageWrap.appendChild(layer);
+    return layer;
+  }
+  function hideMsgLayer() {
+    const layer = stageWrap.querySelector('.game-msg-layer');
+    if (layer) layer.remove();
+  }
+
+  function launchGame(key) {
+    const game = GAMES[key];
+    if (!game) return;
+    currentGame = game;
+    titleEl.textContent = game.title;
+    hintEl.textContent = isTouch ? 'Use the on-screen controls' : game.hint;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    addEventListener('keydown', onKeyDown);
+    addEventListener('keyup', onKeyUp);
+    game.reset(canvas, ctx);
+    scoreEl.textContent = 'Score: 0';
+    showControls(key);
+    showMsgLayer(
+      '<h3>' + game.title + '</h3><p>' + game.desc + '</p><button id="gameStartBtn">START</button>'
+    );
+    document.getElementById('gameStartBtn').addEventListener('click', () => {
+      SFX.unlock();
+      hideMsgLayer();
+      SFX.click();
+      startLoop();
+    });
+  }
+
+  function startLoop() {
+    let last = performance.now();
+    function frame(now) {
+      const dt = Math.min(.05, (now - last) / 1000);
+      last = now;
+      const result = currentGame.update(dt, keys, canvas);
+      currentGame.draw(ctx, canvas);
+      scoreEl.textContent = 'Score: ' + currentGame.score;
+      if (result === 'over') {
+        onGameOver();
+        return;
+      }
+      rafId = requestAnimationFrame(frame);
+    }
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function onGameOver() {
+    SFX.gameover();
+    showMsgLayer(
+      '<h3>GAME OVER</h3><p>Score: ' + currentGame.score + '</p><button id="gameRetryBtn">PLAY AGAIN</button>'
+    );
+    document.getElementById('gameRetryBtn').addEventListener('click', () => {
+      hideMsgLayer(); SFX.click();
+      currentGame.reset(canvas, ctx);
+      startLoop();
+    });
+  }
+
+  function closeGame() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+    removeEventListener('keydown', onKeyDown);
+    removeEventListener('keyup', onKeyUp);
+    hideMsgLayer();
+    hideControls();
+    currentGame = null;
+    for (const k in keys) keys[k] = false;
+  }
+
+  /* ════════════════════════════════════════
+     GAME 1 — PAC-MAN (grid maze, dots, 2 ghosts)
+  ════════════════════════════════════════ */
+  const PacMan = (function () {
+    const COLS = 15, ROWS = 11, CELL = 32;
+    // 1 = wall, 0 = dot, 2 = empty (already eaten / spawn)
+    const baseMap = [
+      "111111111111111",
+      "100000100000001",
+      "101110101110101",
+      "100000000000101",
+      "101101111101101",
+      "100100000001001",
+      "111101111101111",
+      "100000100000001",
+      "101110101110101",
+      "100000000000001",
+      "111111111111111",
+    ].map(r => r.split('').map(Number));
+
+    let map, px, py, pdx, pdy, wantDx, wantDy, ghosts, dotsLeft, score, over;
+
+    function reset() {
+      map = baseMap.map(r => r.slice());
+      // trim map rows to ROWS defined by data (11 rows x 16 cols -> adjust COLS)
+      px = 1; py = 1; pdx = 0; pdy = 0; wantDx = 0; wantDy = 0;
+      score = 0; over = false;
+      dotsLeft = 0;
+      for (let y = 0; y < map.length; y++) for (let x = 0; x < map[y].length; x++) if (map[y][x] === 0) dotsLeft++;
+      ghosts = [
+        { x: 13, y: 1, dx: -1, dy: 0, color: '#c94b4b' },
+        { x: 1, y: 9, dx: 1, dy: 0, color: '#c47f3c' },
+      ];
+    }
+
+    function walkable(x, y) {
+      if (y < 0 || y >= map.length || x < 0 || x >= map[0].length) return false;
+      return map[y][x] !== 1;
+    }
+
+    let moveTimer = 0, ghostTimer = 0;
+    function update(dt, keys) {
+      if (keys['ArrowUp']) { wantDx = 0; wantDy = -1; }
+      else if (keys['ArrowDown']) { wantDx = 0; wantDy = 1; }
+      else if (keys['ArrowLeft']) { wantDx = -1; wantDy = 0; }
+      else if (keys['ArrowRight']) { wantDx = 1; wantDy = 0; }
+
+      moveTimer += dt;
+      if (moveTimer > .14) {
+        moveTimer = 0;
+        if (walkable(px + wantDx, py + wantDy)) { pdx = wantDx; pdy = wantDy; }
+        if (walkable(px + pdx, py + pdy)) { px += pdx; py += pdy; }
+        if (map[py][px] === 0) { map[py][px] = 2; score += 10; dotsLeft--; SFX.chomp(); }
+        if (dotsLeft <= 0) { SFX.win(); over = true; }
+      }
+
+      ghostTimer += dt;
+      if (ghostTimer > .22) {
+        ghostTimer = 0;
+        ghosts.forEach(g => {
+          const opts = [[1,0],[-1,0],[0,1],[0,-1]].filter(([dx,dy]) => walkable(g.x+dx, g.y+dy) && !(dx===-g.dx&&dy===-g.dy));
+          if (opts.length) {
+            opts.sort((a,b) => (Math.hypot((g.x+a[0])-px,(g.y+a[1])-py)) - (Math.hypot((g.x+b[0])-px,(g.y+b[1])-py)));
+            const pick = Math.random() < .6 ? opts[0] : opts[Math.floor(Math.random()*opts.length)];
+            g.dx = pick[0]; g.dy = pick[1];
+          }
+          if (walkable(g.x+g.dx, g.y+g.dy)) { g.x += g.dx; g.y += g.dy; }
+          if (g.x === px && g.y === py) { SFX.hit('pacman'); over = true; }
+        });
+      }
+      return over ? 'over' : 'playing';
+    }
+
+    function draw(ctx, canvas) {
+      ctx.fillStyle = '#12100a'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const offX = (canvas.width - map[0].length*CELL)/2, offY = (canvas.height - map.length*CELL)/2;
+      for (let y = 0; y < map.length; y++) for (let x = 0; x < map[0].length; x++) {
+        const cx = offX + x*CELL, cy = offY + y*CELL;
+        if (map[y][x] === 1) { ctx.fillStyle = '#2a3f7a'; ctx.fillRect(cx+2, cy+2, CELL-4, CELL-4); }
+        else if (map[y][x] === 0) { ctx.fillStyle = '#e4d6a9'; ctx.beginPath(); ctx.arc(cx+CELL/2, cy+CELL/2, 3, 0, 7); ctx.fill(); }
+      }
+      // player
+      ctx.fillStyle = '#f4d03f';
+      ctx.beginPath();
+      const ang = (Math.floor(performance.now()/120)%2)===0 ? .2 : .01;
+      const rot = pdx===1?0:pdx===-1?Math.PI:pdy===1?Math.PI/2:pdy===-1?-Math.PI/2:0;
+      ctx.translate(offX+px*CELL+CELL/2, offY+py*CELL+CELL/2);
+      ctx.rotate(rot);
+      ctx.arc(0,0, CELL/2-3, ang*Math.PI, (2-ang)*Math.PI);
+      ctx.lineTo(0,0); ctx.fill();
+      ctx.setTransform(1,0,0,1,0,0);
+      // ghosts
+      ghosts.forEach(g => {
+        ctx.fillStyle = g.color;
+        const gx = offX+g.x*CELL+CELL/2, gy = offY+g.y*CELL+CELL/2;
+        ctx.beginPath(); ctx.arc(gx, gy, CELL/2-4, Math.PI, 0);
+        ctx.lineTo(gx+CELL/2-4, gy+CELL/2-4); ctx.lineTo(gx, gy+CELL/2-8); ctx.lineTo(gx-CELL/2+4, gy+CELL/2-4);
+        ctx.closePath(); ctx.fill();
+      });
+    }
+
+    return {
+      title: 'PAC-MAN', desc: 'Eat every dot. Avoid the ghosts. Use arrow keys.', hint: 'Arrow keys to move',
+      get score() { return score; },
+      reset, update, draw,
+    };
+  })();
+
+  /* ════════════════════════════════════════
+     GAME 2 — SPACE SHOOTER
+  ════════════════════════════════════════ */
+  const SpaceShooter = (function () {
+    let ship, bullets, enemies, spawnTimer, score, lives, over, shootCd;
+
+    function reset(canvas) {
+      ship = { x: canvas.width/2, y: canvas.height - 34, w: 28, h: 18, speed: 220 };
+      bullets = []; enemies = []; spawnTimer = 0; shootCd = 0;
+      score = 0; lives = 3; over = false;
+    }
+
+    function update(dt, keys, canvas) {
+      if (keys['ArrowLeft']) ship.x -= ship.speed*dt;
+      if (keys['ArrowRight']) ship.x += ship.speed*dt;
+      ship.x = Math.max(16, Math.min((canvas ? canvas.width : 480)-16, ship.x));
+      shootCd -= dt;
+      if ((keys[' '] || keys['ArrowUp']) && shootCd <= 0) {
+        bullets.push({ x: ship.x, y: ship.y-10, r: 3 });
+        SFX.shoot(); shootCd = .28;
+      }
+      bullets.forEach(b => b.y -= 380*dt);
+      bullets = bullets.filter(b => b.y > -10);
+
+      spawnTimer -= dt;
+      if (spawnTimer <= 0) {
+        spawnTimer = Math.max(.35, .9 - score*0.002);
+        enemies.push({ x: 24 + Math.random()*432, y: -16, r: 13, speed: 60 + Math.random()*50 });
+      }
+      enemies.forEach(e => e.y += e.speed*dt);
+
+      for (let i = enemies.length-1; i >= 0; i--) {
+        const e = enemies[i];
+        for (let j = bullets.length-1; j >= 0; j--) {
+          const b = bullets[j];
+          if (Math.hypot(b.x-e.x, b.y-e.y) < e.r+4) {
+            enemies.splice(i,1); bullets.splice(j,1); score += 15; SFX.explode();
+            break;
+          }
+        }
+      }
+      enemies = enemies.filter(e => {
+        if (e.y > (canvas ? canvas.height : 360)+20) return false;
+        if (Math.hypot(e.x-ship.x, e.y-ship.y) < e.r+12) { lives--; SFX.hit('shooter'); return false; }
+        return true;
+      });
+      if (lives <= 0) over = true;
+      return over ? 'over' : 'playing';
+    }
+
+    function draw(ctx, canvas) {
+      ctx.fillStyle = '#060812'; ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = 'rgba(228,214,169,.5)';
+      for (let i=0;i<40;i++) { const sx=(i*53)%canvas.width, sy=(i*97+ (performance.now()/20))%canvas.height; ctx.fillRect(sx, sy, 2, 2); }
+      // ship
+      ctx.fillStyle = '#995F2F';
+      ctx.beginPath(); ctx.moveTo(ship.x, ship.y-12); ctx.lineTo(ship.x-14, ship.y+10); ctx.lineTo(ship.x+14, ship.y+10); ctx.closePath(); ctx.fill();
+      // bullets
+      ctx.fillStyle = '#e4d6a9';
+      bullets.forEach(b => ctx.fillRect(b.x-2, b.y-6, 4, 10));
+      // enemies
+      ctx.fillStyle = '#c94b4b';
+      enemies.forEach(e => { ctx.beginPath(); ctx.arc(e.x, e.y, e.r, 0, 7); ctx.fill(); });
+      // HUD
+      ctx.fillStyle = '#e4d6a9'; ctx.font = '12px monospace';
+      ctx.fillText('LIVES: ' + '♥'.repeat(Math.max(0,lives)), 10, 18);
+    }
+
+    return {
+      title: 'SPACE SHOOTER', desc: 'Move with ← → and shoot with Space. Survive the invasion.', hint: '← → to move · Space to shoot',
+      get score() { return score; },
+      reset, update, draw,
+    };
+  })();
+
+  /* ════════════════════════════════════════
+     GAME 3 — SUPER RUNNER (retro platform jumper)
+  ════════════════════════════════════════ */
+  const Runner = (function () {
+    let player, vy, onGround, obstacles, coins, speed, distTimer, score, over, spawnTimer, coinTimer, groundY;
+
+    function reset(canvas) {
+      groundY = canvas.height - 40;
+      player = { x: 70, y: groundY-28, w: 24, h: 28 };
+      vy = 0; onGround = true; obstacles = []; coins = [];
+      speed = 210; distTimer = 0; spawnTimer = 1; coinTimer = 1.4; score = 0; over = false;
+    }
+
+    function jump() { if (onGround) { vy = -430; onGround = false; SFX.jump(); } }
+
+    function update(dt, keys) {
+      if (keys[' '] || keys['ArrowUp']) jump();
+      vy += 1100*dt; player.y += vy*dt;
+      if (player.y >= groundY-player.h) { player.y = groundY-player.h; vy = 0; onGround = true; }
+
+      speed = Math.min(420, 210 + score*0.4);
+      distTimer += dt; score = Math.floor(distTimer*10);
+
+      spawnTimer -= dt;
+      if (spawnTimer <= 0) { spawnTimer = 1.1 + Math.random()*.9; obstacles.push({ x: 500, y: groundY-24, w: 22, h: 24 }); }
+      coinTimer -= dt;
+      if (coinTimer <= 0) { coinTimer = 1.3 + Math.random()*1.2; coins.push({ x: 500, y: groundY-70-Math.random()*40, r: 8 }); }
+
+      obstacles.forEach(o => o.x -= speed*dt);
+      coins.forEach(c => c.x -= speed*dt);
+      obstacles = obstacles.filter(o => o.x > -30);
+      coins = coins.filter(c => c.x > -20);
+
+      for (const o of obstacles) {
+        if (player.x < o.x+o.w && player.x+player.w > o.x && player.y < o.y+o.h && player.y+player.h > o.y) {
+          SFX.hit('runner'); over = true;
+        }
+      }
+      for (let i = coins.length-1; i >= 0; i--) {
+        const c = coins[i];
+        if (Math.hypot((player.x+player.w/2)-c.x, (player.y+player.h/2)-c.y) < c.r+14) {
+          coins.splice(i,1); score += 25; SFX.coin();
+        }
+      }
+      return over ? 'over' : 'playing';
+    }
+
+    function draw(ctx, canvas) {
+      ctx.fillStyle = '#1c2c1a'; ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#3a5a2e'; ctx.fillRect(0, groundY, canvas.width, canvas.height-groundY);
+      ctx.fillStyle = 'rgba(228,214,169,.15)';
+      for (let i=0;i<canvas.width;i+=40) ctx.fillRect((i - (distTimer*speed)%40), groundY, 20, 4);
+      // player
+      ctx.fillStyle = '#c94b4b'; ctx.fillRect(player.x, player.y, player.w, player.h);
+      ctx.fillStyle = '#f4d03f'; ctx.fillRect(player.x+4, player.y+4, player.w-8, 8);
+      // obstacles
+      ctx.fillStyle = '#622B14';
+      obstacles.forEach(o => ctx.fillRect(o.x, o.y, o.w, o.h));
+      // coins
+      ctx.fillStyle = '#f4d03f';
+      coins.forEach(c => { ctx.beginPath(); ctx.arc(c.x, c.y, c.r, 0, 7); ctx.fill(); });
+    }
+
+    return {
+      title: 'SUPER RUNNER', desc: 'Jump obstacles, grab coins, survive as long as you can.', hint: 'Space / ↑ to jump',
+      get score() { return score; },
+      reset, update, draw,
+    };
+  })();
+
+  const GAMES = { pacman: PacMan, shooter: SpaceShooter, mario: Runner };
+})();
+
 </script>
 </body>
 </html>

@@ -232,9 +232,9 @@ header.scrolled {
   box-shadow: 0 4px 40px rgba(0,0,0,.6);
 }
 nav {
-  max-width: 1280px; margin: auto; height: 100%;
+  max-width: 1520px; margin: auto; height: 100%;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 48px;
+  padding: 0 40px; gap: 20px;
 }
 
 .logo {
@@ -244,6 +244,7 @@ nav {
   font-style: italic;
   position: relative;
   display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
 }
 .logo-seal {
   width: 34px; height: 34px;
@@ -258,17 +259,18 @@ nav {
 .logo:hover .logo-seal { border-color: var(--parchment); }
 .logo span { color: var(--copper); }
 
-.nav-links { display: flex; gap: 28px; }
+.nav-links { display: flex; gap: clamp(14px, 1.8vw, 32px); align-items: center; }
 .nav-link {
   font-family: var(--font-stamp);
-  font-size: .78rem; letter-spacing: 1.5px;
+  font-size: .74rem; letter-spacing: 1.2px;
   text-transform: uppercase; color: var(--muted);
-  position: relative; padding: 4px 0;
+  position: relative; padding: 6px 4px;
   transition: color .25s;
+  white-space: nowrap;
 }
 .nav-link .nl-num {
   font-family: var(--font-mono);
-  font-size: .58rem; color: var(--copper); margin-right: 4px; opacity: .7;
+  font-size: .56rem; color: var(--copper); margin-right: 5px; opacity: .7;
 }
 .nav-link::after {
   content: ''; position: absolute;
@@ -299,7 +301,7 @@ nav {
 .nav-cta:hover::before { transform: none; }
 .nav-cta:hover { color: var(--ink); }
 
-.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-right { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
 .btn-ham {
   display: none;
   width: 40px; height: 40px; flex-direction: column; gap: 5px;
@@ -333,17 +335,19 @@ nav {
   transform: rotate(180deg);
 }
 
-@media(max-width:900px) {
+@media(max-width:1160px) {
   .nav-links {
     position: fixed; top: var(--nav-h); right: -100%;
-    width: min(300px,85vw); height: calc(100vh - var(--nav-h));
+    width: min(320px,85vw); height: calc(100vh - var(--nav-h));
     background: var(--ink2);
     flex-direction: column; gap: 0;
     border-left: 1px solid var(--border);
     transition: right .4s cubic-bezier(.4,0,.2,1);
+    overflow-y: auto;
+    padding-bottom: 30px;
   }
   .nav-links.open { right: 0; }
-  .nav-link { display: block; padding: 18px 32px; font-size: .9rem; }
+  .nav-link { display: block; padding: 15px 28px; font-size: .88rem; }
   .nav-link::after { display: none; }
   .btn-ham { display: flex; }
   .nav-cta { display: none; }
@@ -1168,6 +1172,549 @@ footer::before {
   #games-toggle { left: 16px; bottom: 20px; }
 }
 
+/* ════════════════════════════════════════
+   FEATURE 1: PROFESSIONAL EXPERIENCE
+════════════════════════════════════════ */
+#experience { background: var(--paper); border-bottom: 1px solid var(--border); }
+.exp-filter-strip { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+.exp-flt {
+  font-family: var(--font-stamp); font-size: .72rem; letter-spacing: 2px; text-transform: uppercase;
+  padding: 8px 18px; border-radius: 2px;
+  background: rgba(153,95,47,.06); border: 1px solid rgba(153,95,47,.2);
+  color: var(--muted); cursor: pointer; transition: .25s;
+}
+.exp-flt:hover, .exp-flt.active { background: rgba(153,95,47,.16); border-color: var(--copper); color: var(--parchment); }
+
+.exp-timeline {
+  position: relative; max-width: 980px; margin: 0 auto;
+  padding: 20px 0 20px 36px;
+}
+.exp-timeline::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 14px; width: 2px;
+  background: linear-gradient(180deg, var(--copper), var(--border), var(--copper));
+}
+.exp-item {
+  position: relative; margin-bottom: 34px; transition: opacity .3s, transform .3s;
+}
+.exp-item:last-child { margin-bottom: 0; }
+.exp-marker {
+  position: absolute; left: -36px; top: 26px; width: 26px; height: 26px;
+  border-radius: 50%; background: var(--ink); border: 2px solid var(--copper);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--copper); font-size: .7rem; box-shadow: 0 0 14px rgba(153,95,47,.45);
+  z-index: 2; transition: transform .3s, background .3s;
+}
+.exp-item:hover .exp-marker {
+  transform: scale(1.2); background: var(--copper); color: var(--ink);
+}
+.exp-card {
+  background: var(--card); border: 1px solid var(--border2); border-radius: var(--radius);
+  padding: 28px; position: relative; overflow: hidden; transition: .35s cubic-bezier(.4,0,.2,1);
+}
+.exp-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--rust), var(--copper), transparent);
+  opacity: .5; transition: opacity .3s;
+}
+.exp-card:hover {
+  transform: translateY(-5px); border-color: rgba(153,95,47,.35);
+  box-shadow: 0 20px 60px rgba(0,0,0,.45), 5px 5px 0 rgba(153,95,47,.18);
+}
+.exp-card:hover::before { opacity: 1; }
+
+.exp-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 16px; margin-bottom: 16px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--border2);
+}
+.exp-org-wrap { display: flex; align-items: center; gap: 14px; }
+.exp-logo-seal {
+  width: 46px; height: 46px; border: 1.5px solid var(--copper); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ink2); color: var(--copper); font-size: 1.25rem; flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(153,95,47,.15);
+}
+.exp-role-info h3 {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 700;
+  color: var(--parchment); margin-bottom: 4px; font-style: italic;
+}
+.exp-company {
+  font-family: var(--font-stamp); font-size: .8rem; letter-spacing: 1px;
+  color: var(--copper); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.exp-type-badge {
+  font-family: var(--font-mono); font-size: .62rem; letter-spacing: .5px;
+  padding: 3px 8px; border-radius: 2px; text-transform: uppercase;
+  background: rgba(153,95,47,.15); border: 1px solid rgba(153,95,47,.3); color: var(--parchment2);
+}
+.exp-meta-badges {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+}
+.exp-time-badge, .exp-loc-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: .7rem; color: var(--muted);
+}
+.exp-time-badge i, .exp-loc-badge i { color: var(--copper); font-size: .8rem; }
+
+.exp-desc { color: var(--muted); font-size: .88rem; line-height: 1.8; margin-bottom: 16px; }
+
+.exp-contributions-title {
+  font-family: var(--font-stamp); font-size: .74rem; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--parchment2); margin-bottom: 10px;
+}
+.exp-contributions {
+  list-style: none; margin: 0 0 18px 0; padding: 0; display: flex; flex-direction: column; gap: 8px;
+}
+.exp-contributions li {
+  position: relative; padding-left: 20px; font-size: .85rem; color: var(--muted); line-height: 1.7;
+}
+.exp-contributions li::before {
+  content: '✦'; position: absolute; left: 0; top: 0; color: var(--copper); font-size: .75rem;
+}
+.exp-tech-row { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+.exp-tech-label {
+  font-family: var(--font-mono); font-size: .65rem; color: var(--muted2);
+  margin-right: 4px; text-transform: uppercase; letter-spacing: 1px;
+}
+
+
+/* Status Badges for Experience */
+.exp-status-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-mono); font-size: .68rem; font-weight: 700; letter-spacing: 1.5px;
+  padding: 4px 12px; border-radius: 20px; text-transform: uppercase;
+}
+.exp-status-badge.working {
+  background: rgba(125,196,106,.15); border: 1.5px solid #7dc46a; color: #7dc46a;
+}
+.exp-status-badge.working .status-dot {
+  background: #7dc46a; box-shadow: 0 0 8px #7dc46a; animation: pulse 2s infinite;
+}
+.exp-status-badge.in-progress {
+  background: rgba(201,166,75,.15); border: 1.5px solid #c9a64b; color: #e5c158;
+}
+.exp-status-badge.in-progress .status-dot {
+  background: #c9a64b; box-shadow: 0 0 8px #c9a64b; animation: pulse 2s infinite;
+}
+.exp-status-badge.completed {
+  background: rgba(125,196,106,.15); border: 1.5px solid #7dc46a; color: #7dc46a;
+}
+.exp-status-badge.completed .status-dot.completed-dot {
+  background: #7dc46a; box-shadow: 0 0 6px #7dc46a; animation: none;
+}
+
+.exp-company-name {
+  font-family: var(--font-stamp); font-size: 1rem; color: var(--copper); font-weight: 700;
+  letter-spacing: 1px;
+}
+.exp-designation {
+  font-family: var(--font-display); font-size: 1.28rem; font-weight: 700;
+  color: var(--parchment); margin-top: 4px; margin-bottom: 2px; font-style: italic;
+}
+.exp-duration-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: .7rem; color: var(--sage3);
+}
+.exp-duration-badge i { color: var(--copper); }
+
+/* Experience Accordion */
+.exp-accordion-wrap {
+  margin: 18px 0; border-radius: var(--radius);
+}
+.exp-accordion-toggle {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(153,95,47,.08); border: 1px solid var(--border);
+  border-radius: var(--radius); font-family: var(--font-stamp); font-size: .78rem;
+  letter-spacing: 1.5px; color: var(--parchment2); cursor: pointer; transition: .25s;
+  text-transform: uppercase;
+}
+.exp-accordion-toggle:hover {
+  background: rgba(153,95,47,.16); border-color: var(--copper); color: var(--parchment);
+}
+.exp-accordion-toggle .exp-chevron {
+  transition: transform .3s cubic-bezier(.4,0,.2,1); color: var(--copper); font-size: .8rem;
+}
+.exp-accordion-toggle[aria-expanded="false"] .exp-chevron {
+  transform: rotate(-90deg);
+}
+.exp-accordion-content {
+  max-height: 1200px; overflow: hidden; opacity: 1;
+  transition: max-height .4s ease, opacity .3s ease, margin-top .3s ease;
+  margin-top: 14px;
+}
+.exp-accordion-content.collapsed {
+  max-height: 0; opacity: 0; margin-top: 0; pointer-events: none;
+}
+
+.exp-subgroup-title {
+  font-family: var(--font-stamp); font-size: .78rem; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--copper); margin: 16px 0 8px 0;
+  display: flex; align-items: center; gap: 8px;
+}
+.exp-subgroup-title i { color: var(--copper); font-size: .85rem; }
+
+/* Experience Call to Action & Website Link */
+.exp-action-row {
+  margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+}
+.exp-action-lead {
+  font-family: var(--font-mono); font-size: .74rem; color: var(--muted);
+  display: inline-flex; align-items: center; gap: 8px; letter-spacing: .5px;
+}
+.exp-action-lead i { color: var(--copper); font-size: .8rem; }
+.exp-visit-btn {
+  padding: 10px 24px; font-size: .78rem; letter-spacing: 1.5px; text-decoration: none;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 8px;
+}
+
+/* Client Work Terminal Tag & Badges */
+.cw-terminal-header {
+  display: flex; justify-content: center; margin-bottom: 20px;
+}
+.cw-terminal-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 4px; background: var(--card2);
+  border: 1px solid var(--copper); font-family: var(--font-mono); font-size: .74rem;
+  color: var(--parchment); letter-spacing: 1px; box-shadow: 0 4px 14px rgba(0,0,0,.3);
+}
+.t-dot-green {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #4bc97f; box-shadow: 0 0 8px #4bc97f;
+}
+.cw-badge-client {
+  display: inline-block; font-family: var(--font-mono); font-size: .62rem;
+  font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 4px;
+}
+
+.exp-empty-state {
+  text-align: center; padding: 50px 24px; background: var(--card);
+  border: 1px dashed var(--border); border-radius: var(--radius);
+  display: none; flex-direction: column; align-items: center; gap: 14px; margin-top: 20px;
+}
+.exp-empty-state.show { display: flex; }
+.exp-empty-icon { font-size: 2.5rem; color: var(--copper); }
+.exp-empty-state h3 { font-family: var(--font-display); font-size: 1.25rem; color: var(--parchment); font-style: italic; }
+.exp-empty-state p { color: var(--muted); font-size: .88rem; max-width: 460px; line-height: 1.8; }
+
+/* ════════════════════════════════════════
+   FEATURE 2: CLIENT WORK
+════════════════════════════════════════ */
+#client-work { background: var(--ink2); border-bottom: 1px solid var(--border); }
+.cw-filter-strip { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+.cw-flt {
+  font-family: var(--font-stamp); font-size: .72rem; letter-spacing: 2px; text-transform: uppercase;
+  padding: 8px 18px; border-radius: 2px;
+  background: rgba(153,95,47,.06); border: 1px solid rgba(153,95,47,.2);
+  color: var(--muted); cursor: pointer; transition: .25s;
+}
+.cw-flt:hover, .cw-flt.active { background: rgba(153,95,47,.16); border-color: var(--copper); color: var(--parchment); }
+
+.cw-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px;
+}
+.cw-card {
+  background: var(--card); border: 1px solid var(--border2); border-radius: var(--radius);
+  overflow: hidden; display: flex; flex-direction: column; transition: .4s cubic-bezier(.4,0,.2,1);
+  position: relative; cursor: default;
+}
+.cw-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--rust), var(--copper), transparent);
+  opacity: .4; transition: opacity .3s; z-index: 3;
+}
+.cw-card:hover {
+  transform: translateY(-8px); border-color: rgba(153,95,47,.35);
+  box-shadow: 0 24px 70px rgba(0,0,0,.5), 6px 6px 0 rgba(153,95,47,.2);
+}
+.cw-card:hover::before { opacity: 1; }
+
+.cw-thumb {
+  height: 220px; position: relative; overflow: hidden; background: var(--ink);
+}
+.cw-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: sepia(.35) brightness(.75) contrast(1.05) saturate(.7);
+  transition: .6s cubic-bezier(.4,0,.2,1);
+}
+.cw-thumb img.cw-thumb-logo {
+  object-fit: contain;
+  padding: 24px;
+}
+.cw-card:hover .cw-thumb img {
+  transform: scale(1.06); filter: sepia(.15) brightness(.85) saturate(.9);
+}
+.cw-thumb-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,18,8,.92) 0%, transparent 60%);
+}
+.cw-thumb-badges {
+  position: absolute; top: 12px; left: 12px; right: 12px;
+  display: flex; justify-content: space-between; align-items: center; z-index: 2;
+}
+.cw-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: .62rem; letter-spacing: 1px;
+  padding: 4px 10px; border-radius: 20px; background: rgba(18,14,8,.85);
+  border: 1px solid rgba(153,95,47,.3); backdrop-filter: blur(8px);
+  color: var(--parchment2);
+}
+.cw-status.completed .cw-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #4bc97f;
+  box-shadow: 0 0 8px #4bc97f;
+}
+.cw-status.in-progress .cw-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #c9a64b;
+  box-shadow: 0 0 8px #c9a64b;
+}
+.cw-category {
+  font-family: var(--font-stamp); font-size: .62rem; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 2px;
+  background: var(--rust); color: var(--parchment); border: 1px solid var(--copper);
+}
+
+.cw-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+.cw-client {
+  font-family: var(--font-mono); font-size: .68rem; color: var(--copper);
+  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px;
+}
+.cw-title {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 700;
+  color: var(--parchment); margin-bottom: 10px; font-style: italic; transition: color .25s;
+}
+.cw-card:hover .cw-title { color: var(--copper); }
+.cw-desc { color: var(--muted); font-size: .86rem; line-height: 1.8; margin-bottom: 16px; flex: 1; }
+
+.cw-meta-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-mono); font-size: .68rem; color: var(--muted2);
+  margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border2);
+  flex-wrap: wrap; gap: 8px;
+}
+.cw-role-tag { color: var(--text2); }
+.cw-date-tag { color: var(--copper); }
+
+.cw-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.cw-actions { display: flex; gap: 10px; margin-top: auto; }
+.cw-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 14px; border-radius: var(--radius); font-family: var(--font-stamp);
+  font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer; transition: .25s; flex: 1; text-align: center;
+}
+.cw-btn-live {
+  background: var(--rust); border: 1.5px solid var(--copper); color: var(--parchment);
+}
+.cw-btn-live:hover { background: var(--copper); color: var(--ink); }
+.cw-btn-details {
+  background: var(--card2); border: 1.5px solid var(--border); color: var(--text2);
+}
+.cw-btn-details:hover { border-color: var(--copper); color: var(--copper); background: var(--card3, var(--card2)); }
+
+/* Client Work Commission Callout Card */
+.cw-hire-card {
+  background: linear-gradient(135deg, rgba(98,43,20,.18), rgba(153,95,47,.09));
+  border: 1.5px dashed var(--copper); border-radius: var(--radius);
+  padding: 36px 28px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; gap: 14px;
+}
+.cw-hire-icon { font-size: 2.6rem; color: var(--copper); }
+.cw-hire-card h3 { font-family: var(--font-display); font-size: 1.25rem; color: var(--parchment); font-style: italic; }
+.cw-hire-card p { color: var(--muted); font-size: .88rem; line-height: 1.8; max-width: 340px; }
+
+/* Client Work Details Modal */
+.cw-modal-bg {
+  position: fixed; inset: 0; z-index: 5000;
+  background: rgba(0,0,0,.88); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  opacity: 0; pointer-events: none; transition: opacity .35s;
+}
+.cw-modal-bg.open { opacity: 1; pointer-events: all; }
+.cw-modal {
+  background: var(--card); border: 1px solid var(--copper); border-radius: var(--radius);
+  width: 100%; max-width: 780px; max-height: 90vh; overflow-y: auto;
+  transform: translateY(24px) scale(.98); transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 40px 90px rgba(0,0,0,.75), 8px 8px 0 rgba(98,43,20,.4);
+}
+.cw-modal-bg.open .cw-modal { transform: none; }
+.cw-modal::-webkit-scrollbar { width: 4px; }
+.cw-modal::-webkit-scrollbar-thumb { background: var(--copper); border-radius: 2px; }
+.cw-modal-header {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; background: var(--ink2); border-bottom: 1px solid var(--border);
+}
+.cw-modal-eyebrow {
+  font-family: var(--font-stamp); font-size: .75rem; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--copper);
+}
+.cw-modal-close {
+  background: var(--card2); border: 1px solid var(--border); color: var(--text);
+  width: 32px; height: 32px; border-radius: 2px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: .2s; font-family: var(--font-mono); font-size: 1.1rem;
+}
+.cw-modal-close:hover { border-color: var(--copper); color: var(--copper); transform: rotate(90deg); }
+.cw-modal-hero { width: 100%; height: 260px; object-fit: cover; filter: sepia(.3) brightness(.8) saturate(.75); display: block; }
+.cw-modal-body { padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+.cw-modal-client-label {
+  font-family: var(--font-mono); font-size: .72rem; color: var(--copper);
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.cw-modal-title { font-family: var(--font-display); font-size: 1.6rem; color: var(--parchment); font-style: italic; }
+.cw-modal-meta-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;
+  padding: 16px; background: var(--ink2); border: 1px solid var(--border2); border-radius: var(--radius);
+}
+.cw-modal-meta-item strong { display: block; font-family: var(--font-stamp); font-size: .68rem; color: var(--copper); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+.cw-modal-meta-item span { font-family: var(--font-mono); font-size: .78rem; color: var(--text2); }
+.cw-modal-section h4 { font-family: var(--font-stamp); font-size: .78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--parchment2); margin-bottom: 8px; }
+.cw-modal-section p { color: var(--muted); font-size: .88rem; line-height: 1.8; }
+.cw-modal-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; margin: 0; }
+.cw-modal-list li { position: relative; padding-left: 20px; font-size: .86rem; color: var(--muted); line-height: 1.7; }
+.cw-modal-list li::before { content: '✦'; position: absolute; left: 0; color: var(--copper); font-size: .75rem; }
+.cw-modal-footer {
+  display: flex; gap: 12px; padding: 18px 32px; background: var(--ink2);
+  border-top: 1px solid var(--border); justify-content: flex-end;
+}
+
+/* ════════════════════════════════════════
+   UPGRADED SMART FLOATING WIDGETS
+════════════════════════════════════════ */
+#chat-toggle, #games-toggle {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+#chat-toggle.is-dragging, #games-toggle.is-dragging {
+  cursor: grabbing !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 16px 36px rgba(0,0,0,.75) !important;
+  opacity: .95;
+  transition: none !important;
+}
+#chat-toggle:focus-visible, #games-toggle:focus-visible {
+  outline: 2px dashed var(--copper);
+  outline-offset: 4px;
+}
+
+/* Header controls for floating widgets */
+.wgt-head-controls {
+  margin-left: auto; display: flex; align-items: center; gap: 6px;
+}
+.wgt-btn {
+  width: 24px; height: 24px; border-radius: 2px;
+  background: var(--card2); border: 1px solid var(--border2); color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .7rem; cursor: pointer; transition: .2s;
+}
+.wgt-btn:hover { border-color: var(--copper); color: var(--copper); background: var(--card3, var(--card2)); }
+.wgt-btn:focus-visible { outline: 1px solid var(--copper); }
+.wgt-drag-handle {
+  cursor: grab; display: flex; align-items: center; gap: 8px; flex: 1; user-select: none;
+}
+.wgt-drag-handle:active { cursor: grabbing; }
+
+.chat-online-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #4bc97f;
+  box-shadow: 0 0 6px #4bc97f; display: inline-block; margin-left: 2px;
+}
+.wgt-drag-foot {
+  padding: 6px 14px; background: var(--ink); border-top: 1px solid var(--border2);
+  font-family: var(--font-mono); font-size: .62rem; color: var(--muted2);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.wgt-reset-inline {
+  background: none; border: none; color: var(--copper);
+  font-family: var(--font-mono); font-size: .62rem; text-decoration: underline;
+  cursor: pointer; padding: 0;
+}
+.wgt-reset-inline:hover { color: var(--parchment); }
+
+/* Responsive adjustments for mobile and tablets */
+@media (max-width: 900px) {
+  .exp-timeline { padding-left: 28px; }
+  .exp-timeline::before { left: 10px; }
+  .exp-marker { left: -28px; width: 22px; height: 22px; font-size: .6rem; }
+  .exp-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .exp-meta-badges { align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .exp-timeline { padding-left: 20px; }
+  .exp-timeline::before { left: 6px; }
+  .exp-marker { left: -20px; width: 18px; height: 18px; font-size: .55rem; }
+  .exp-card { padding: 20px 16px; }
+  .exp-org-wrap { gap: 10px; }
+  .exp-logo-seal { width: 38px; height: 38px; font-size: 1rem; }
+  .exp-action-row { flex-direction: column; align-items: stretch; gap: 12px; }
+  .exp-visit-btn { width: 100%; justify-content: center; text-align: center; }
+  .cw-grid { grid-template-columns: 1fr; }
+  .cw-body { padding: 18px; }
+  .cw-modal-body { padding: 20px; }
+}
+
+@media (max-width: 540px) {
+  #chat-window, #games-window {
+    position: fixed !important;
+    left: 12px !important; right: 12px !important; bottom: 84px !important;
+    top: auto !important; width: auto !important; max-width: calc(100vw - 24px) !important;
+    max-height: 75vh !important;
+  }
+  #chat-toggle { bottom: 20px; right: 18px; }
+  #games-toggle { bottom: 20px; left: 18px; }
+}
+
+/* Light Mode Overrides for Feature 1 & 2 */
+body.light-mode #experience { background: var(--paper); }
+body.light-mode #client-work { background: var(--paper2); }
+body.light-mode .exp-card,
+body.light-mode .cw-card,
+body.light-mode .cw-modal {
+  background: #fdfaf5;
+  border-color: rgba(98,43,20,.15);
+  box-shadow: 0 10px 30px rgba(98,43,20,.08);
+}
+body.light-mode .exp-card:hover,
+body.light-mode .cw-card:hover {
+  border-color: var(--copper);
+  box-shadow: 0 16px 40px rgba(98,43,20,.14);
+}
+body.light-mode .exp-role-info h3,
+body.light-mode .cw-title,
+body.light-mode .cw-modal-title { color: #221808; }
+body.light-mode .exp-logo-seal { background: #f4ecdf; }
+
+body.light-mode .exp-designation { color: #221808; }
+body.light-mode .exp-accordion-toggle { background: #f4ecdf; color: #221808; border-color: rgba(98,43,20,.2); }
+body.light-mode .exp-accordion-toggle:hover { background: #ede2d1; border-color: var(--copper); }
+body.light-mode .cw-terminal-badge { background: #f4ecdf; color: #221808; border-color: var(--copper); }
+
+body.light-mode .cw-modal-header,
+body.light-mode .cw-modal-meta-grid,
+body.light-mode .cw-modal-footer,
+body.light-mode .wgt-drag-foot { background: #f4ecdf; }
+body.light-mode .cw-modal-close,
+body.light-mode .wgt-btn { background: #e8dccb; color: #221808; }
+body.light-mode .exp-desc,
+body.light-mode .cw-desc,
+body.light-mode .exp-contributions li,
+body.light-mode .cw-modal-section p,
+body.light-mode .cw-modal-list li { color: #4a3c2c; }
+body.light-mode .exp-action-row { border-top-color: rgba(98,43,20,.15); }
+body.light-mode .exp-action-lead { color: #6a5c3c; }
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1202,8 +1749,10 @@ footer::before {
       <li><a href="#skills" class="nav-link"><span class="nl-num">03.</span>Skills</a></li>
       <li><a href="#achievements" class="nav-link"><span class="nl-num">04.</span>Wins</a></li>
       <li><a href="#projects" class="nav-link"><span class="nl-num">05.</span>Work</a></li>
-      <li><a class='nav-link' href='/blog'><span class="nl-num">06.</span>Blog</a></li>
-      <li><a href="#contact" class="nav-link"><span class="nl-num">07.</span>Contact</a></li>
+      <li><a href="#experience" class="nav-link"><span class="nl-num">06.</span>Experience</a></li>
+      <li><a href="#client-work" class="nav-link"><span class="nl-num">07.</span>Client Work</a></li>
+      <li><a class='nav-link' href='blog.html'><span class="nl-num">08.</span>Blog</a></li>
+      <li><a href="#contact" class="nav-link"><span class="nl-num">09.</span>Contact</a></li>
     </ul>
     <div class="nav-right">
       <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">☀️</button>
@@ -1235,7 +1784,7 @@ footer::before {
         <span id="typed"></span>
       </div>
       <p class="home-desc">
-        Passionate BCA student and aspiring <strong> Full Stack Developer</strong> from Surat, India.
+        AI-Integrated Full Stack Developer, Prompt Engineer, and BCA Student from Surat, India.
         Building smart, responsive web experiences — Purple Belt in Shotokan Karate 🥋
       </p>
       <div class="btn-row">
@@ -1360,7 +1909,7 @@ footer::before {
       <div class="ach-card" data-reveal="up" style="transition-delay:.05s"><div class="ach-icon-wrap">🥋</div><h3>Purple Belt — Shotokan Karate</h3><p>Achieved Purple Belt rank demonstrating discipline, focus, and years of dedicated martial arts practice.</p></div>
       <div class="ach-card" data-reveal="up" style="transition-delay:.15s"><div class="ach-icon-wrap">🏆</div><h3>2nd Rank — Data Drill Competition</h3><p>Secured Second Rank in the Inter-College Python Programming competition at C.K. Pithawala College, Surat.</p></div>
       <div class="ach-card" data-reveal="up" style="transition-delay:.25s"><div class="ach-icon-wrap">🌐</div><h3>Full Stack Web Developer</h3><p>Designed and deployed multiple production-ready, responsive web applications using modern web technologies.</p></div>
-      <div class="ach-card" data-reveal="up" style="transition-delay:.35s"><div class="ach-icon-wrap">🎓</div><h3>BCA Honours — Vivekanand College</h3><p>3rd year Bachelor of Computer Applications (Hons.), consistently building technical skills and real-world projects.</p></div>
+      <div class="ach-card" data-reveal="up" style="transition-delay:.35s"><div class="ach-icon-wrap">🎓</div><h3>BCA — Vivekanand College</h3><p>3rd year Bachelor of Computer Applications, consistently building technical skills and real-world projects.</p></div>
     </div>
   </div>
 </section>
@@ -1436,16 +1985,425 @@ footer::before {
       </div>
       <div class="proj-card" data-reveal="up" style="transition-delay:.40s">
         <div class="proj-thumb">
-          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" alt="Project placeholder"/>
+          <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80" alt="Data Drill Python Competition"/>
           <div class="proj-overlay"></div>
-          <div class="proj-live"><a href="#" target="_blank">↗ Live Demo</a></div>
+          <div class="proj-live"><a href="https://github.com/RJD1926" target="_blank">↗ GitHub Profile</a></div>
         </div>
         <div class="proj-body">
-          <div class="proj-tags"><span class="ptag">Tag</span><span class="ptag">Tag</span><span class="ptag">Tag</span></div>
-          <h3>Project Title</h3>
-          <p>Short description of the project goes here. Swap this image, link, and text once the project is ready.</p>
+          <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Algorithms</span><span class="ptag">2nd Rank</span></div>
+          <h3>Data Drill Competition Project</h3>
+          <p>High-efficiency algorithm implementation and data processing system that secured Second Rank in the Inter-College Python Programming competition at C.K. Pithawala College.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ EXPERIENCE ══════════ -->
+<section id="experience">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px" data-reveal="up">
+      <div class="eyebrow" style="justify-content:center">Career &amp; Industry Experience</div>
+      <h2 class="sec-title">Professional <span class="stroke">Experience</span></h2>
+      <div class="ornament" style="justify-content:center"><span>✦</span></div>
+      <p style="max-width:680px;margin:0 auto;color:var(--muted);font-size:.92rem;line-height:1.8">
+        A timeline of my hands-on software engineering engagements, agency leadership, and dynamic AI-driven full-stack development.
+      </p>
+    </div>
+
+    <!-- Filter Strip -->
+    <div class="exp-filter-strip" data-reveal="up">
+      <button class="exp-flt active" data-exp-filter="all">All Experiences</button>
+      <button class="exp-flt" data-exp-filter="fullstack">Full Stack &amp; AI</button>
+      <button class="exp-flt" data-exp-filter="independent">Independent Dev</button>
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="exp-timeline">
+
+      <!-- Entry 1: GrowVora Market Agency -->
+      <div class="exp-item" data-exp-cat="fullstack" data-reveal="up">
+        <div class="exp-marker"><i class="fa-solid fa-brain"></i></div>
+        <div class="exp-card">
+          <!-- 1. Company Name & 2. Professional Designation -->
+          <div class="exp-head">
+            <div class="exp-org-wrap">
+              <div class="exp-logo-seal" title="GrowVora Market Agency"><i class="fa-solid fa-chart-line"></i></div>
+              <div class="exp-role-info">
+                <div class="exp-company">
+                  <span class="exp-company-name">GrowVora Market Agency</span>
+                  <span class="exp-type-badge">Agency Role</span>
+                </div>
+                <h3 class="exp-designation">Senior AI-Integrated Full Stack Developer</h3>
+              </div>
+            </div>
+            <!-- 3. Employment Period, 4. Duration, 5. Status Indicator -->
+            <div class="exp-meta-badges">
+              <span class="exp-status-badge working"><span class="status-dot"></span>CURRENTLY WORKING</span>
+              <span class="exp-time-badge"><i class="fa-regular fa-calendar"></i> July 2026 – Present</span>
+              <span class="exp-duration-badge"><i class="fa-regular fa-clock"></i> Duration: Present</span>
+              <span class="exp-loc-badge"><i class="fa-solid fa-location-dot"></i> Surat / Hybrid</span>
+            </div>
+          </div>
+
+          <p class="exp-desc">
+            Directing full-stack web application development and AI agent integrations at GrowVora Market Agency. Driving intelligent customer-facing workflows, high-converting service portals, and responsive architectures.
+          </p>
+
+          <!-- 6. Responsibilities Accordion -->
+          <div class="exp-accordion-wrap">
+            <button class="exp-accordion-toggle" aria-expanded="true" type="button">
+              <span><i class="fa-solid fa-layer-group" style="margin-right:8px;color:var(--copper)"></i>Core Responsibilities &amp; AI Integrations (9 Key Areas)</span>
+              <i class="fa-solid fa-chevron-down exp-chevron"></i>
+            </button>
+            <div class="exp-accordion-content">
+              <ul class="exp-contributions">
+                <li>Developing full-stack websites and web applications with AI-powered capabilities.</li>
+                <li>Integrating AI APIs and Large Language Models (LLMs) into web applications.</li>
+                <li>Building AI-powered chatbots, intelligent assistants, and automated workflows.</li>
+                <li>Developing responsive frontend interfaces and backend functionality.</li>
+                <li>Implementing AI-driven features using prompt engineering and context-aware interactions.</li>
+                <li>Integrating databases, REST APIs, authentication systems, and third-party services.</li>
+                <li>Developing custom admin dashboards and client-oriented management systems.</li>
+                <li>Optimizing application performance, AI response handling, and user experience.</li>
+                <li>Leveraging modern AI tools to enhance development workflows and application functionality.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 7. Technologies and Relevant Skills -->
+          <div class="exp-tech-row">
+            <span class="exp-tech-label">Technologies &amp; Skills:</span>
+            <span class="ptag">Next.js</span>
+            <span class="ptag">React</span>
+            <span class="ptag">Node.js</span>
+            <span class="ptag">TypeScript</span>
+            <span class="ptag">Tailwind CSS</span>
+            <span class="ptag">OpenAI API</span>
+            <span class="ptag">Gemini API</span>
+            <span class="ptag">LLM Integration</span>
+            <span class="ptag">Prompt Engineering</span>
+            <span class="ptag">Python</span>
+            <span class="ptag">PostgreSQL</span>
+            <span class="ptag">REST APIs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entry 2: Coding House Pvt. Ltd. -->
+      <div class="exp-item" data-exp-cat="fullstack" data-reveal="up" style="transition-delay:.1s">
+        <div class="exp-marker"><i class="fa-solid fa-code"></i></div>
+        <div class="exp-card">
+          <!-- 1. Company Name & 2. Professional Designation -->
+          <div class="exp-head">
+            <div class="exp-org-wrap">
+              <div class="exp-logo-seal" title="Coding House Pvt. Ltd."><i class="fa-solid fa-building-code"></i></div>
+              <div class="exp-role-info">
+                <div class="exp-company">
+                  <span class="exp-company-name">Coding House Pvt. Ltd.</span>
+                  <span class="exp-type-badge">Industry Engagement</span>
+                </div>
+                <h3 class="exp-designation">AI-Integrated Full Stack Developer</h3>
+              </div>
+            </div>
+            <!-- 3. Employment Period, 4. Duration, 5. Status Indicator -->
+            <div class="exp-meta-badges">
+              <span id="codingHouseStatusBadge" class="exp-status-badge in-progress" data-transition-date="2026-12-12">
+                <span class="status-dot"></span>IN PROGRESS
+              </span>
+              <span class="exp-time-badge"><i class="fa-regular fa-calendar"></i> 10 October 2026 – 10 December 2026</span>
+              <span class="exp-duration-badge"><i class="fa-regular fa-clock"></i> Duration: 2 Months</span>
+              <span class="exp-loc-badge"><i class="fa-solid fa-location-dot"></i> Surat, India (On-Site)</span>
+            </div>
+          </div>
+
+          <p class="exp-desc">
+            Engineered full-stack features and automated data processing pipelines at Coding House Pvt. Ltd. Connected LLM prompts and statistical libraries to streamline analytics workflows and frontend performance.
+          </p>
+
+          <!-- 6. Responsibilities Accordion (2 Groups) -->
+          <div class="exp-accordion-wrap">
+            <button class="exp-accordion-toggle" aria-expanded="true" type="button">
+              <span><i class="fa-solid fa-diagram-project" style="margin-right:8px;color:var(--copper)"></i>Key Responsibilities &amp; Deliverables (Full Stack &amp; Data Analysis)</span>
+              <i class="fa-solid fa-chevron-down exp-chevron"></i>
+            </button>
+            <div class="exp-accordion-content">
+              <div class="exp-subgroup-title"><i class="fa-solid fa-laptop-code"></i> Group A: Full Stack &amp; AI Development</div>
+              <ul class="exp-contributions">
+                <li>Developed full-stack web applications integrating modern web technologies and AI capabilities.</li>
+                <li>Created responsive and high-performance frontend interfaces with modern frameworks.</li>
+                <li>Built robust backend logic, RESTful API integrations, and database schemas.</li>
+                <li>Implemented AI-driven automation workflows and intelligent system logic.</li>
+                <li>Connected LLM services and contextual prompts for automated interactions.</li>
+              </ul>
+
+              <div class="exp-subgroup-title"><i class="fa-solid fa-chart-pie"></i> Group B: Data Analysis &amp; Processing</div>
+              <ul class="exp-contributions">
+                <li>Performed structured data analysis, data cleaning, and statistical processing.</li>
+                <li>Built automated data processing pipelines and reporting scripts.</li>
+                <li>Extracted actionable insights and generated data visualization summaries.</li>
+                <li>Validated data integrity, schema consistency, and API data payloads.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 7. Technologies and Relevant Skills -->
+          <div class="exp-tech-row">
+            <span class="exp-tech-label">Technologies &amp; Skills:</span>
+            <span class="ptag">Full Stack Web Development</span>
+            <span class="ptag">AI Integration</span>
+            <span class="ptag">Prompt Engineering</span>
+            <span class="ptag">Python</span>
+            <span class="ptag">Data Analysis</span>
+            <span class="ptag">Pandas</span>
+            <span class="ptag">NumPy</span>
+            <span class="ptag">REST APIs</span>
+            <span class="ptag">SQL</span>
+            <span class="ptag">Data Cleaning</span>
+          </div>
+        </div>
+      </div>
+
+            <!-- Entry 3: CoderBoyz -->
+      <div class="exp-item" data-exp-cat="independent fullstack" data-reveal="up" style="transition-delay:.15s">
+        <div class="exp-marker"><i class="fa-solid fa-laptop-code"></i></div>
+        <div class="exp-card">
+          <!-- 1. Organization Name & 2. Professional Designation -->
+          <div class="exp-head">
+            <div class="exp-org-wrap">
+              <div class="exp-logo-seal" title="CoderBoyz"><i class="fa-solid fa-code"></i></div>
+              <div class="exp-role-info">
+                <div class="exp-company">
+                  <span class="exp-company-name">CoderBoyz</span>
+                  <span class="exp-type-badge">Independent Development / Freelance</span>
+                </div>
+                <h3 class="exp-designation">Co-Founder &amp; Developer</h3>
+              </div>
+            </div>
+            <!-- 3. Status Indicator & Meta Badges -->
+            <div class="exp-meta-badges">
+              <span class="exp-status-badge working"><span class="status-dot"></span>CURRENTLY ACTIVE</span>
+              <span class="exp-duration-badge"><i class="fa-regular fa-clock"></i> Duration: Active</span>
+              <span class="exp-loc-badge"><i class="fa-solid fa-globe"></i> Remote / Global</span>
+            </div>
+          </div>
+
+          <p class="exp-desc">
+            Serving as Co-Founder &amp; Developer at CoderBoyz — building thoughtful digital experiences, scalable full-stack applications, and intelligent solutions for ambitious businesses and client initiatives.
+          </p>
+
+          <!-- Responsibilities Accordion -->
+          <div class="exp-accordion-wrap">
+            <button class="exp-accordion-toggle" aria-expanded="true" type="button">
+              <span><i class="fa-solid fa-layer-group" style="margin-right:8px;color:var(--copper)"></i>Core Responsibilities &amp; Engineering Scope (8 Key Areas)</span>
+              <i class="fa-solid fa-chevron-down exp-chevron"></i>
+            </button>
+            <div class="exp-accordion-content">
+              <ul class="exp-contributions">
+                <li>Full-Stack Web Development</li>
+                <li>Frontend &amp; Backend Development</li>
+                <li>AI &amp; Machine Learning Solutions</li>
+                <li>Data Science &amp; Data Analysis</li>
+                <li>UI/UX Design</li>
+                <li>API Development &amp; Integration</li>
+                <li>Building and Managing Client Projects</li>
+                <li>Developing modern, responsive web applications</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Technologies & Skills -->
+          <div class="exp-tech-row">
+            <span class="exp-tech-label">Core Capabilities:</span>
+            <span class="ptag">Full-Stack Web Development</span>
+            <span class="ptag">Frontend &amp; Backend</span>
+            <span class="ptag">AI &amp; Machine Learning</span>
+            <span class="ptag">Data Science &amp; Analysis</span>
+            <span class="ptag">UI/UX Design</span>
+            <span class="ptag">API Integration</span>
+            <span class="ptag">Client Projects</span>
+          </div>
+
+          <!-- Website Action Button -->
+          <div class="exp-action-row">
+            <span class="exp-action-lead"><i class="fa-solid fa-arrow-up-right-from-square"></i>Explore the official CoderBoyz platform &amp; digital solutions:</span>
+            <a href="https://coderboyz.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary exp-visit-btn">
+              Visit CoderBoyz ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Empty State -->
+    <div class="exp-empty-state" id="expEmptyState">
+      <div class="exp-empty-icon"><i class="fa-solid fa-folder-open"></i></div>
+      <h3>No entries currently in this category</h3>
+      <p>I am actively seeking new engineering opportunities! Let's connect and discuss how I can contribute to your team.</p>
+      <a href="#contact" class="btn btn-primary">✉ Get In Touch</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ CLIENT WORK ══════════ -->
+<section id="client-work">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px" data-reveal="up">
+      <div class="cw-terminal-header">
+        <div class="cw-terminal-badge"><span class="t-dot-green"></span> client_work.exe &mdash; Production Deployments</div>
+      </div>
+      <div class="eyebrow" style="justify-content:center">Commercial &amp; Commissioned</div>
+      <h2 class="sec-title">Client <span class="stroke">Work</span></h2>
+      <div class="ornament" style="justify-content:center"><span>✦</span></div>
+      <p style="max-width:680px;margin:0 auto;color:var(--muted);font-size:.92rem;line-height:1.8">
+        Production web applications and bespoke digital platforms engineered for actual businesses, creative professionals, financial traders, and cultural academies.
+      </p>
+    </div>
+
+    <!-- Filter Strip -->
+    <div class="cw-filter-strip" data-reveal="up">
+      <button class="cw-flt active" data-cw-filter="all">All Projects</button>
+      <button class="cw-flt" data-cw-filter="marketing">Agency &amp; Marketing</button>
+      <button class="cw-flt" data-cw-filter="media">Media &amp; Entertainment</button>
+      <button class="cw-flt" data-cw-filter="finance">Finance &amp; Trading</button>
+      <button class="cw-flt" data-cw-filter="academy">Arts &amp; Academy</button>
+    </div>
+
+    <!-- Client Work Grid -->
+    <div class="cw-grid">
+
+      <!-- Card 1: GrowVora Market Agency -->
+      <div class="cw-card" data-cw-cat="marketing" data-reveal="up" style="transition-delay:.05s">
+        <div class="cw-thumb">
+          <img src="https://growvora.indlan.me/logo.png" alt="GrowVora Market Agency Logo" class="cw-thumb-logo" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80'"/>
+          <div class="cw-thumb-overlay"></div>
+          <div class="cw-thumb-badges">
+            <span class="cw-status completed"><span class="cw-dot"></span>Completed</span>
+            <span class="cw-category">Digital Marketing</span>
+          </div>
+        </div>
+        <div class="cw-body">
+          <span class="cw-badge-client">CLIENT PROJECT</span>
+          <div class="cw-client">GrowVora Market Agency</div>
+          <h3 class="cw-title">GrowVora Digital Marketing Agency Platform</h3>
+          <p class="cw-desc">A high-performance agency website featuring dynamic service catalogs, lead generation funnels, modern editorial typography, and seamless client onboarding workflows.</p>
+          <div class="cw-meta-row">
+            <span class="cw-role-tag"><strong>Role:</strong> Senior AI-Integrated Full Stack Dev</span>
+            <span class="cw-date-tag">Completed</span>
+          </div>
+          <div class="cw-tags">
+            <span class="ptag">Next.js</span>
+            <span class="ptag">React</span>
+            <span class="ptag">Tailwind CSS</span>
+            <span class="ptag">TypeScript</span>
+            <span class="ptag">REST APIs</span>
+          </div>
+          <div class="cw-actions">
+            <a href="https://growvora.indlan.me/" target="_blank" rel="noopener noreferrer" class="cw-btn cw-btn-live">↗ Live Website</a>
+            <button class="cw-btn cw-btn-details" data-client-modal="growvora" type="button">🔍 View Details</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Prathmesh Films -->
+      <div class="cw-card" data-cw-cat="media" data-reveal="up" style="transition-delay:.15s">
+        <div class="cw-thumb">
+          <img src="https://prathmeshfilms.netlify.app/assets/portrait.jpg" alt="Prathmesh Films Portfolio" onerror="this.src='https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80'"/>
+          <div class="cw-thumb-overlay"></div>
+          <div class="cw-thumb-badges">
+            <span class="cw-status completed"><span class="cw-dot"></span>Completed</span>
+            <span class="cw-category">Video Production</span>
+          </div>
+        </div>
+        <div class="cw-body">
+          <span class="cw-badge-client">CLIENT PROJECT</span>
+          <div class="cw-client">Prathmesh Films</div>
+          <h3 class="cw-title">Prathmesh Films Portfolio &amp; Production Studio</h3>
+          <p class="cw-desc">A cinematic portfolio showcasing commercial video editing, film post-production, high-definition video reels, client testimonials, and direct booking inquiries.</p>
+          <div class="cw-meta-row">
+            <span class="cw-role-tag"><strong>Role:</strong> Frontend Web Dev &amp; UI Designer</span>
+            <span class="cw-date-tag">Completed</span>
+          </div>
+          <div class="cw-tags">
+            <span class="ptag">HTML5</span>
+            <span class="ptag">CSS3</span>
+            <span class="ptag">JavaScript</span>
+            <span class="ptag">Video API</span>
+            <span class="ptag">Netlify</span>
+          </div>
+          <div class="cw-actions">
+            <a href="https://prathmeshfilms.netlify.app/" target="_blank" rel="noopener noreferrer" class="cw-btn cw-btn-live">↗ Live Website</a>
+            <button class="cw-btn cw-btn-details" data-client-modal="prathmesh" type="button">🔍 View Details</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Rudra Vaghela -->
+      <div class="cw-card" data-cw-cat="finance" data-reveal="up" style="transition-delay:.25s">
+        <div class="cw-thumb">
+          <img src="https://rudravaghela.netlify.app/main.png" alt="Rudra Vaghela Financial Platform" onerror="this.src='https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80'"/>
+          <div class="cw-thumb-overlay"></div>
+          <div class="cw-thumb-badges">
+            <span class="cw-status completed"><span class="cw-dot"></span>Completed</span>
+            <span class="cw-category">Finance &amp; Trading</span>
+          </div>
+        </div>
+        <div class="cw-body">
+          <span class="cw-badge-client">CLIENT PROJECT</span>
+          <div class="cw-client">Rudra Vaghela</div>
+          <h3 class="cw-title">Rudra Vaghela Finance Advisor &amp; Trader Platform</h3>
+          <p class="cw-desc">A sleek financial consulting and stock market advisory platform with market analysis highlights, client mentorship programs, and financial consultation booking.</p>
+          <div class="cw-meta-row">
+            <span class="cw-role-tag"><strong>Role:</strong> Web Dev &amp; UI/UX Specialist</span>
+            <span class="cw-date-tag">Completed</span>
+          </div>
+          <div class="cw-tags">
+            <span class="ptag">Modern JavaScript</span>
+            <span class="ptag">Responsive UI</span>
+            <span class="ptag">Netlify</span>
+            <span class="ptag">Custom Styling</span>
+          </div>
+          <div class="cw-actions">
+            <a href="https://rudravaghela.netlify.app/" target="_blank" rel="noopener noreferrer" class="cw-btn cw-btn-live">↗ Live Website</a>
+            <button class="cw-btn cw-btn-details" data-client-modal="rudravaghela" type="button">🔍 View Details</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: SRN Bharatanatyam -->
+      <div class="cw-card" data-cw-cat="academy" data-reveal="up" style="transition-delay:.35s">
+        <div class="cw-thumb">
+          <img src="https://www.natyasutraonline.com/picturegallery/large/112_02082023103416.jpg" alt="SRN Bharatanatyam Academy" onerror="this.src='https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&q=80'"/>
+          <div class="cw-thumb-overlay"></div>
+          <div class="cw-thumb-badges">
+            <span class="cw-status completed"><span class="cw-dot"></span>Completed</span>
+            <span class="cw-category">Classical Dance</span>
+          </div>
+        </div>
+        <div class="cw-body">
+          <span class="cw-badge-client">CLIENT PROJECT</span>
+          <div class="cw-client">SRN Bharatanatyam</div>
+          <h3 class="cw-title">SRN Bharatanatyam Dance Academy Portal</h3>
+          <p class="cw-desc">An expressive cultural academy web presence promoting traditional Bharatanatyam dance courses, student recital galleries, event schedules, and admissions.</p>
+          <div class="cw-meta-row">
+            <span class="cw-role-tag"><strong>Role:</strong> Frontend Developer &amp; UI Designer</span>
+            <span class="cw-date-tag">Completed</span>
+          </div>
+          <div class="cw-tags">
+            <span class="ptag">HTML5</span>
+            <span class="ptag">CSS3</span>
+            <span class="ptag">Responsive Layout</span>
+            <span class="ptag">Media Showcase</span>
+          </div>
+          <div class="cw-actions">
+            <a href="https://srnbharatnatyam.netlify.app/" target="_blank" rel="noopener noreferrer" class="cw-btn cw-btn-live">↗ Live Website</a>
+            <button class="cw-btn cw-btn-details" data-client-modal="srn" type="button">🔍 View Details</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1511,7 +2469,8 @@ footer::before {
       <div class="footer-links">
         <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a>
         <a href="#achievements">Achievements</a><a href="#projects">Projects</a>
-        <a href="#blog">Blog</a><a href="#contact">Contact</a>
+        <a href="#experience">Experience</a><a href="#client-work">Client Work</a>
+        <a href="blog.html">Blog</a><a href="#contact">Contact</a>
       </div>
     </div>
     <div class="footer-col" data-reveal="up" style="transition-delay:.2s">
@@ -1534,36 +2493,109 @@ footer::before {
   </div>
 </footer>
 
-<!-- CHATBOT WIDGET (rule-based, no API) -->
-<button id="chat-toggle" aria-label="Open chat assistant"><i class="fa-brands fa-d-and-d"></i></button>
-<button id="games-toggle" aria-label="Open retro games arcade"><i class="fa-solid fa-gamepad"></i></button>
-<div id="games-window">
-  <div class="games-head"><i class='bx bx-joystick'></i><span>Retro Arcade</span></div>
-  <div class="games-list">
-    <div class="game-item" data-game="pacman">
-      <i class="fa-solid fa-ghost"></i>
-      <div class="game-item-info"><span class="game-name">Pac-Man</span><span class="game-desc">Classic dot-muncher</span></div>
-      <button class="game-play-btn">PLAY</button>
+<!-- ══════════ CLIENT WORK DETAILS MODAL ══════════ -->
+<div class="cw-modal-bg" id="cwModalBg" role="dialog" aria-modal="true" aria-labelledby="cwModalTitle">
+  <div class="cw-modal" id="cwModal">
+    <div class="cw-modal-header">
+      <div class="cw-modal-eyebrow" id="cwModalCategory">Client Showcase</div>
+      <button class="cw-modal-close" id="cwModalClose" aria-label="Close details modal">&times;</button>
     </div>
-    <div class="game-item" data-game="shooter">
-      <i class='bx bx-rocket'></i>
-      <div class="game-item-info"><span class="game-name">Space Shooter</span><span class="game-desc">Blast the invaders</span></div>
-      <button class="game-play-btn">PLAY</button>
+    <img src="" alt="" class="cw-modal-hero" id="cwModalHero"/>
+    <div class="cw-modal-body">
+      <div class="cw-modal-client-label" id="cwModalClient">Client Name</div>
+      <h3 class="cw-modal-title" id="cwModalTitle">Project Title</h3>
+      
+      <div class="cw-modal-meta-grid">
+        <div class="cw-modal-meta-item">
+          <strong>Project Status</strong>
+          <span id="cwModalStatus">Completed</span>
+        </div>
+        <div class="cw-modal-meta-item">
+          <strong>Timeline</strong>
+          <span id="cwModalDate">April 2024</span>
+        </div>
+        <div class="cw-modal-meta-item">
+          <strong>Role &amp; Responsibilities</strong>
+          <span id="cwModalRole">Frontend Developer</span>
+        </div>
+      </div>
+
+      <div class="cw-modal-section">
+        <h4>Project Background</h4>
+        <p id="cwModalOverview">Overview text goes here.</p>
+      </div>
+
+      <div class="cw-modal-section">
+        <h4>The Objective &amp; Problem Solved</h4>
+        <p id="cwModalProblem">Problem statement goes here.</p>
+      </div>
+
+      <div class="cw-modal-section">
+        <h4>Key Contributions &amp; Deliverables</h4>
+        <ul class="cw-modal-list" id="cwModalContributions">
+        </ul>
+      </div>
+
+      <div class="cw-modal-section">
+        <h4>Technologies &amp; Methodologies</h4>
+        <div class="proj-tags" id="cwModalTags">
+        </div>
+      </div>
     </div>
-    <div class="game-item" data-game="mario">
-      <i class='bx bx-run'></i>
-      <div class="game-item-info"><span class="game-name">Super Runner</span><span class="game-desc">Jump &amp; collect coins</span></div>
-      <button class="game-play-btn">PLAY</button>
+    <div class="cw-modal-footer">
+      <a href="#" target="_blank" class="cw-btn cw-btn-live" id="cwModalLiveBtn">↗ Visit Live Project</a>
     </div>
   </div>
 </div>
 
+<!-- ══════════ MOVABLE FLOATING WIDGETS ══════════ -->
+<!-- Retro Games Arcade Launcher -->
+<button id="games-toggle" aria-label="Open retro arcade games (Draggable, Alt+G)" title="Retro Arcade (Drag to move · Alt+G)" tabindex="0">
+  <i class="fa-solid fa-gamepad"></i>
+</button>
+
+<div id="games-window" role="region" aria-label="Retro games arcade panel">
+  <div class="games-head">
+    <div class="wgt-drag-handle" title="Drag to reposition panel">
+      <i class='bx bx-joystick'></i>
+      <span>Retro Arcade</span>
+    </div>
+    <div class="wgt-head-controls">
+      <button class="wgt-btn wgt-reset" title="Reset widget positions to corners" aria-label="Reset positions"><i class="fa-solid fa-arrows-rotate"></i></button>
+      <button class="wgt-btn games-min" title="Minimize panel" aria-label="Minimize arcade"><i class="fa-solid fa-minus"></i></button>
+      <button class="wgt-btn games-close" title="Close panel" aria-label="Close arcade"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+  <div class="games-list">
+    <div class="game-item" data-game="pacman">
+      <i class="fa-solid fa-ghost"></i>
+      <div class="game-item-info"><span class="game-name">Pac-Man</span><span class="game-desc">Classic dot-muncher</span></div>
+      <button class="game-play-btn" aria-label="Play Pac-Man">PLAY</button>
+    </div>
+    <div class="game-item" data-game="shooter">
+      <i class='bx bx-rocket'></i>
+      <div class="game-item-info"><span class="game-name">Space Shooter</span><span class="game-desc">Blast the invaders</span></div>
+      <button class="game-play-btn" aria-label="Play Space Shooter">PLAY</button>
+    </div>
+    <div class="game-item" data-game="mario">
+      <i class='bx bx-run'></i>
+      <div class="game-item-info"><span class="game-name">Super Runner</span><span class="game-desc">Jump &amp; collect coins</span></div>
+      <button class="game-play-btn" aria-label="Play Super Runner">PLAY</button>
+    </div>
+  </div>
+  <div class="wgt-drag-foot">
+    <span><i class="fa-solid fa-up-down-left-right"></i> Drag launcher / header</span>
+    <button class="wgt-reset-inline wgt-reset" title="Reset widget position">Reset</button>
+  </div>
+</div>
+
+<!-- Fullscreen Game Overlay (Pac-Man, Space Shooter, Super Runner) -->
 <div id="game-overlay">
   <div class="game-stage">
     <div class="game-stage-head">
       <span id="gameTitle">GAME</span>
       <span id="gameScore">Score: 0</span>
-      <button id="gameClose"><i class='bx bx-x'></i></button>
+      <button id="gameClose" aria-label="Exit Game"><i class='bx bx-x'></i></button>
     </div>
     <div class="game-canvas-wrap">
       <canvas id="gameCanvas" width="480" height="360"></canvas>
@@ -1573,19 +2605,41 @@ footer::before {
   </div>
 </div>
 
-<div id="chat-window">
-  <div class="chat-head"><i class="fa-brands fa-d-and-d"></i><span>Ask Rudra's Desk</span></div>
+<!-- Chatbot Assistant Launcher -->
+<button id="chat-toggle" aria-label="Open chat assistant (Draggable, Alt+C)" title="Ask Rudra's Desk (Drag to move · Alt+C)" tabindex="0">
+  <i class="fa-brands fa-d-and-d"></i>
+</button>
+
+<div id="chat-window" role="dialog" aria-label="Ask Rudra's Desk chat assistant">
+  <div class="chat-head">
+    <div class="wgt-drag-handle" title="Drag to reposition panel">
+      <i class="fa-brands fa-d-and-d"></i>
+      <span>Ask Rudra's Desk</span>
+      <span class="chat-online-dot" title="Online assistant"></span>
+    </div>
+    <div class="wgt-head-controls">
+      <button class="wgt-btn wgt-reset" title="Reset widget positions to corners" aria-label="Reset positions"><i class="fa-solid fa-arrows-rotate"></i></button>
+      <button class="wgt-btn chat-min" title="Minimize chat" aria-label="Minimize chat"><i class="fa-solid fa-minus"></i></button>
+      <button class="wgt-btn chat-close" title="Close chat" aria-label="Close chat"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
   <div class="chat-body" id="chatBody">
-    <div class="chat-msg bot">Hi! I'm a quick offline assistant. Ask me about skills, projects, or how to get in touch with Rudra.</div>
+    <div class="chat-msg bot">Hi! I'm Rudra's desk assistant. Ask me about skills, projects, experience, client work, or how to get in touch!</div>
   </div>
   <div class="chat-quick">
     <button class="chat-chip" data-q="skills">Skills</button>
     <button class="chat-chip" data-q="projects">Projects</button>
+    <button class="chat-chip" data-q="experience">Experience</button>
+    <button class="chat-chip" data-q="clientwork">Client Work</button>
     <button class="chat-chip" data-q="contact">Contact</button>
   </div>
   <div class="chat-input-row">
-    <input type="text" id="chatInput" placeholder="Type a question..."/>
-    <button id="chatSend"><i class="fa-solid fa-paper-plane"></i></button>
+    <input type="text" id="chatInput" placeholder="Type a question... (or Alt+C to toggle)" aria-label="Type your question to Rudra's Desk"/>
+    <button id="chatSend" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
+  </div>
+  <div class="wgt-drag-foot">
+    <span><i class="fa-solid fa-up-down-left-right"></i> Drag launcher / header · Alt+C</span>
+    <button class="wgt-reset-inline wgt-reset" title="Reset widget position">Reset</button>
   </div>
 </div>
 
@@ -1642,7 +2696,7 @@ document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; })
   cRing.style.left = rx + 'px'; cRing.style.top = ry + 'px';
   requestAnimationFrame(animCursor);
 })();
-document.querySelectorAll('a,button,.blog-card,.proj-card,.ach-card,.sk-card,.social-link,.fsocial,.contact-item').forEach(el => {
+document.querySelectorAll('a,button,.blog-card,.proj-card,.ach-card,.sk-card,.social-link,.fsocial,.contact-item,.exp-card,.cw-card,.exp-flt,.cw-flt,.cw-btn,.wgt-btn,.wgt-reset,.wgt-reset-inline,.cw-modal-close').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
 });
@@ -1762,7 +2816,7 @@ drawBG();
 
 /* ════ TYPED.JS ════ */
 new Typed('#typed', {
-  strings: ['BCA Student.', 'Full Stack Developer.', 'Prompt Engineer.', 'Karate Purple Belt 🥋', 'Web Enthusiast.'],
+  strings: ['AI-Integrated Full Stack Developer.', 'Prompt Engineer.', 'BCA Student.', 'Karate Purple Belt 🥋'],
   typeSpeed: 65, backSpeed: 30, backDelay: 1800, loop: true,
 });
 
@@ -1841,46 +2895,311 @@ window.addEventListener('scroll', () => {
   if (el) el.style.transform = 'translateY(' + (window.scrollY * .05) + 'px)';
 }, { passive: true });
 
-/* ════ CHATBOT (rule-based, no API) ════ */
-(function () {
-  const toggle = document.getElementById('chat-toggle');
-  const win = document.getElementById('chat-window');
+/* ════ FEATURE 1: EXPERIENCE FILTER ════ */
+(function initExperienceFilter() {
+  const filterBtns = document.querySelectorAll('.exp-flt');
+  const items = document.querySelectorAll('.exp-item');
+  const emptyState = document.getElementById('expEmptyState');
+  if (!filterBtns.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.expFilter;
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const cat = item.dataset.expCat;
+        if (filter === 'all' || cat === filter || (cat && cat.split(' ').includes(filter))) {
+          item.style.display = '';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (emptyState) {
+        if (visibleCount === 0) {
+          emptyState.classList.add('show');
+        } else {
+          emptyState.classList.remove('show');
+        }
+      }
+    });
+  });
+})();
+
+/* ════ FEATURE 1: EXPERIENCE ACCORDION & STATUS DYNAMIC RULE ════ */
+(function initExperienceEnhancements() {
+  // 1. Accordion Toggling
+  document.querySelectorAll('.exp-accordion-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !isExpanded);
+      const content = btn.nextElementSibling;
+      if (content && content.classList.contains('exp-accordion-content')) {
+        content.classList.toggle('collapsed', isExpanded);
+      }
+    });
+  });
+
+  // 2. Dynamic Status Evaluation for Coding House Pvt. Ltd.
+  const codingHouseBadge = document.getElementById('codingHouseStatusBadge');
+  if (codingHouseBadge) {
+    const transitionDate = new Date('2026-12-12T00:00:00');
+    const now = new Date();
+    if (now >= transitionDate) {
+      codingHouseBadge.className = 'exp-status-badge completed';
+      codingHouseBadge.innerHTML = '<span class="status-dot completed-dot"></span>COMPLETED';
+    } else {
+      codingHouseBadge.className = 'exp-status-badge in-progress';
+      codingHouseBadge.innerHTML = '<span class="status-dot"></span>IN PROGRESS';
+    }
+  }
+})();
+
+/* ════ FEATURE 2: CLIENT WORK DATA & MODAL ════ */
+const CLIENT_PROJECTS_DATA = {
+  growvora: {
+    client: 'GrowVora Market Agency',
+    title: 'GrowVora Digital Marketing Agency Platform',
+    category: 'Digital Marketing & Business Website',
+    status: 'Completed',
+    date: 'July 2026 – Present',
+    role: 'Senior AI-Integrated Full Stack Developer',
+    img: 'https://growvora.indlan.me/logo.png',
+    live: 'https://growvora.indlan.me/',
+    overview: 'GrowVora Market Agency is a digital marketing and growth consulting firm. They required a fast, highly modern agency web platform to showcase their multi-channel marketing solutions, client case studies, and automated lead capture workflows.',
+    problem: 'The agency needed an authoritative digital brand presence with bespoke layouts, dynamic service breakdowns, and smooth mobile transitions to convert high-ticket enterprise and SMB leads.',
+    contributions: [
+      'Engineered responsive web applications and landing experiences with Next.js, React, and Tailwind CSS.',
+      'Integrated AI-assisted customer interaction funnels and automated client inquiry pipelines.',
+      'Constructed intuitive service presentation sections with editorial typography matching modern design trends.',
+      'Optimized asset delivery, SEO metadata, and Core Web Vitals for maximum discovery.'
+    ],
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'REST APIs', 'LLM Integration']
+  },
+  prathmesh: {
+    client: 'Prathmesh Films',
+    title: 'Prathmesh Films Portfolio & Production Studio',
+    category: 'Video Editor Portfolio & Production Studio',
+    status: 'Completed',
+    date: 'Completed',
+    role: 'Frontend Web Developer & UI Designer',
+    img: 'https://prathmeshfilms.netlify.app/assets/portrait.jpg',
+    live: 'https://prathmeshfilms.netlify.app/',
+    overview: 'Prathmesh Films is a creative commercial video editor and post-production studio specializing in cinematic reels, ad commercials, and narrative film editing.',
+    problem: 'The client needed a high-impact, visual-first portfolio capable of showcasing 4K video reels seamlessly without bogging down mobile loading speeds.',
+    contributions: [
+      'Designed a sleek, dark-themed cinematic portfolio highlighting video reel showcases and client testimonials.',
+      'Implemented responsive video player embeds and lazy-loaded media assets for swift performance.',
+      'Created intuitive inquiry channels for producers and commercial clients to book editing suites.',
+      'Deployed on Netlify with automated continuous deployment and CDN caching.'
+    ],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Video API', 'Netlify', 'UI/UX Design']
+  },
+  rudravaghela: {
+    client: 'Rudra Vaghela',
+    title: 'Rudra Vaghela Finance Advisor & Trader Platform',
+    category: 'Finance Advisor & Stock Trader Portfolio',
+    status: 'Completed',
+    date: 'Completed',
+    role: 'Web Developer & UI/UX Specialist',
+    img: 'https://rudravaghela.netlify.app/main.png',
+    live: 'https://rudravaghela.netlify.app/',
+    overview: 'Rudra Vaghela is a certified financial consultant, stock market trader, and mentor helping individuals build sustainable wealth and disciplined market strategies.',
+    problem: 'Prospective students and financial advisory clients needed a single credible platform to view trading methodologies, client testimonials, and consultation packages.',
+    contributions: [
+      'Built a clean, trust-inspiring financial portfolio featuring key financial metrics and advisory services.',
+      'Crafted interactive consultation booking channels and direct messaging touchpoints.',
+      'Developed responsive multi-breakpoint layouts with dark/light visual harmony.',
+      'Optimized client conversion funnels and mentorship registration pathways.'
+    ],
+    tech: ['Modern JavaScript', 'Responsive UI', 'Netlify', 'Custom CSS', 'Web Performance']
+  },
+  srn: {
+    client: 'SRN Bharatanatyam',
+    title: 'SRN Bharatanatyam Dance Academy Portal',
+    category: 'Classical Dance Academy & Cultural Arts',
+    status: 'Completed',
+    date: 'Completed',
+    role: 'Frontend Developer & Content Architect',
+    img: 'https://www.natyasutraonline.com/picturegallery/large/112_02082023103416.jpg',
+    live: 'https://srnbharatnatyam.netlify.app/',
+    overview: 'SRN Bharatanatyam is an esteemed cultural academy dedicated to the preservation and teaching of the classical Indian dance form of Bharatanatyam.',
+    problem: 'The academy required an elegant cultural web portal to present dance curriculum, recital photographs, performance schedules, and student admission information.',
+    contributions: [
+      'Architected a graceful, culturally expressive layout honoring classical Indian aesthetic traditions.',
+      'Developed student recital photo galleries and seasonal performance calendar schedules.',
+      'Engineered accessible admission inquiry forms connecting parents and aspiring dancers with instructors.',
+      'Ensured full mobile responsiveness across all devices and screen sizes.'
+    ],
+    tech: ['HTML5', 'CSS3', 'Responsive Layout', 'Media Showcase', 'Netlify']
+  }
+};
+
+(function initClientWork() {
+  const filterBtns = document.querySelectorAll('.cw-flt');
+  const cards = document.querySelectorAll('.cw-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.cwFilter;
+
+      cards.forEach(card => {
+        const cat = card.dataset.cwCat;
+        if (filter === 'all' || cat === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  const modalBg = document.getElementById('cwModalBg');
+  const modal = document.getElementById('cwModal');
+  const closeBtn = document.getElementById('cwModalClose');
+
+  function openClientModal(id) {
+    const data = CLIENT_PROJECTS_DATA[id];
+    if (!data || !modalBg) return;
+
+    document.getElementById('cwModalCategory').textContent = data.category + ' · Case Study';
+    document.getElementById('cwModalClient').textContent = data.client;
+    document.getElementById('cwModalTitle').textContent = data.title;
+    document.getElementById('cwModalStatus').textContent = data.status;
+    document.getElementById('cwModalDate').textContent = data.date;
+    document.getElementById('cwModalRole').textContent = data.role;
+    const heroImg = document.getElementById('cwModalHero');
+    heroImg.src = data.img;
+    heroImg.alt = data.title;
+    if (id === 'growvora') {
+      heroImg.style.objectFit = 'contain';
+      heroImg.style.padding = '24px';
+      heroImg.style.background = 'var(--ink)';
+    } else {
+      heroImg.style.objectFit = '';
+      heroImg.style.padding = '';
+      heroImg.style.background = '';
+    }
+    document.getElementById('cwModalOverview').textContent = data.overview;
+    document.getElementById('cwModalProblem').textContent = data.problem;
+
+    const contList = document.getElementById('cwModalContributions');
+    contList.innerHTML = '';
+    data.contributions.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      contList.appendChild(li);
+    });
+
+    const tagsWrap = document.getElementById('cwModalTags');
+    tagsWrap.innerHTML = '';
+    data.tech.forEach(t => {
+      const sp = document.createElement('span');
+      sp.className = 'ptag';
+      sp.textContent = t;
+      tagsWrap.appendChild(sp);
+    });
+
+    const liveBtn = document.getElementById('cwModalLiveBtn');
+    if (data.live && data.live !== '#') {
+      liveBtn.href = data.live;
+      liveBtn.style.display = 'inline-flex';
+    } else {
+      liveBtn.style.display = 'none';
+    }
+
+    modal.scrollTop = 0;
+    modalBg.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeClientModal() {
+    if (!modalBg) return;
+    modalBg.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-client-modal]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openClientModal(btn.dataset.clientModal);
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeClientModal);
+  if (modalBg) {
+    modalBg.addEventListener('click', (e) => {
+      if (e.target === modalBg) closeClientModal();
+    });
+  }
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalBg && modalBg.classList.contains('open')) {
+      closeClientModal();
+    }
+  });
+})();
+
+/* ════ FEATURE 3: UPGRADED CHATBOT (rule-based offline assistant) ════ */
+(function initChatbot() {
   const body = document.getElementById('chatBody');
   const input = document.getElementById('chatInput');
   const send = document.getElementById('chatSend');
   const chips = document.querySelectorAll('.chat-chip');
 
-  toggle.addEventListener('click', () => {
-    win.classList.toggle('open');
-    toggle.classList.toggle('open');
-    if (win.classList.contains('open')) input.focus();
-  });
-
   function addMsg(text, who) {
     const m = document.createElement('div');
     m.className = 'chat-msg ' + who;
-    m.textContent = text;
+    m.innerHTML = text;
     body.appendChild(m);
     body.scrollTop = body.scrollHeight;
   }
 
   function reply(raw) {
-    const q = raw.toLowerCase();
-    if (q.includes('contact') || q.includes('email') || q.includes('reach') || q.includes('hire'))
-      return "You can reach Rudra at Rudrajdave19026@gmail.com, through the Contact form on this page, or via LinkedIn linked in the footer.";
-    if (q.includes('skill') || q.includes('tech') || q.includes('stack'))
-      return "Rudra works with .NET, JavaScript, HTML/CSS, and is exploring AI/prompt engineering. Check the Skills section above for the full toolkit.";
-    if (q.includes('project') || q.includes('work') || q.includes('portfolio'))
-      return "There's a Featured Projects section on this page with live demos, including an AI website builder and a 3D solar system simulation.";
-    if (q.includes('resume') || q.includes('cv'))
-      return "You can download the resume from the footer under the Download section.";
-    if (q.includes('who') || q.includes('rudra'))
-      return "Rudra J. Dave is a BCA Honours student and full stack developer from Surat, also a Karate Purple Belt.";
-    if (q.includes('hi') || q.includes('hello') || q.includes('hey'))
-      return "Hey there! Ask me about skills, projects, or how to get in touch.";
-    if (q.includes('thank'))
-      return "Anytime, glad to help!";
-    return "I'm a simple offline assistant, so I can only help with quick questions about skills, projects, or contact info.";
+    const q = raw.toLowerCase().trim();
+    if (q.includes('contact') || q.includes('email') || q.includes('reach') || q.includes('hire') || q.includes('phone')) {
+      return "You can reach Rudra directly via email at <a href='mailto:Rudrajdave19026@gmail.com' style='color:var(--copper);text-decoration:underline;'>Rudrajdave19026@gmail.com</a>, call <a href='tel:+917567931200' style='color:var(--copper);text-decoration:underline;'>+91 75679 31200</a>, or use the Contact terminal form right on this page!";
+    }
+    if (q.includes('coderboyz') || q.includes('coder boyz')) {
+      return "Rudra is <strong>Co-Founder & Developer at CoderBoyz</strong> (Independent Development / Freelance), delivering full-stack web applications, AI & machine learning solutions, data science, UI/UX design, and client projects. Visit their platform at <a href='https://coderboyz.vercel.app/' target='_blank' rel='noopener noreferrer' style='color:var(--copper);text-decoration:underline;'>coderboyz.vercel.app</a>!";
+    }
+    if (q.includes('growvora') || q.includes('coding house') || q.includes('experience') || q.includes('career') || q.includes('job') || q.includes('history') || q.includes('intern') || q.includes('work history')) {
+      return "Rudra currently serves as <strong>Senior AI-Integrated Full Stack Developer at GrowVora Market Agency</strong> (July 2026 – Present), building AI-powered web applications and LLM workflows. He is also <strong>Co-Founder & Developer at CoderBoyz</strong> (Independent Development / Freelance), and worked at <strong>Coding House Pvt. Ltd.</strong> (Oct – Dec 2026). Check out the <strong>Experience</strong> section above for his full interactive timeline!";
+    }
+    if (q.includes('client') || q.includes('commercial') || q.includes('prathmesh') || q.includes('vaghela') || q.includes('bharatanatyam') || q.includes('srn')) {
+      return "Rudra has built production websites for actual clients: <strong>GrowVora Market Agency</strong> (digital marketing platform), <strong>Prathmesh Films</strong> (cinematic video editor portfolio), <strong>Rudra Vaghela</strong> (financial advisor & trader showcase), and <strong>SRN Bharatanatyam</strong> (classical dance academy). Explore live links and case studies in the dedicated <strong>Client Work</strong> section!";
+    }
+    if (q.includes('game') || q.includes('arcade') || q.includes('pacman') || q.includes('space') || q.includes('runner') || q.includes('play')) {
+      return "You can play 3 retro games directly on this site: <strong>Pac-Man Classic</strong>, <strong>Space Shooter</strong>, and <strong>Super Runner</strong>! Press <strong>Alt + G</strong> or click the gamepad button to open the Retro Arcade.";
+    }
+    if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('language') || q.includes('prompt') || q.includes('ai') || q.includes('c#') || q.includes('python')) {
+      return "Rudra's core toolkit includes <strong>Full Stack Web Development</strong>, <strong>AI & LLM Integration</strong> (OpenAI, Gemini), <strong>Prompt Engineering</strong>, <strong>Next.js / React</strong>, <strong>Node.js</strong>, <strong>Python</strong>, <strong>Data Analysis (Pandas, NumPy)</strong>, <strong>SQL</strong>, and <strong>C# / .NET</strong>. Explore the Skills section above!";
+    }
+    if (q.includes('project') || q.includes('portfolio') || q.includes('builder') || q.includes('solar')) {
+      return "Featured personal projects include an <strong>AI Website Builder</strong>, a <strong>3D Solar System</strong> simulation, <strong>JMD Watch Shop</strong>, and the <strong>Data Drill Python Algorithm</strong> project. In addition, 4 live client platforms are showcased in the Client Work section!";
+    }
+    if (q.includes('resume') || q.includes('cv') || q.includes('download')) {
+      return "You can download Rudra's official resume by clicking the <strong>CV</strong> button in the navigation bar or in the footer under Download.";
+    }
+    if (q.includes('karate') || q.includes('belt') || q.includes('shotokan') || q.includes('martial')) {
+      return "Rudra holds a <strong>Purple Belt in Shotokan Karate</strong>! Martial arts discipline, patience, and composure directly influence his clean engineering mindset and problem-solving.";
+    }
+    if (q.includes('who') || q.includes('rudra') || q.includes('about')) {
+      return "Rudra J. Dave is an <strong>AI-Integrated Full Stack Developer | Prompt Engineer | BCA Student</strong> from Surat, India, and a Shotokan Karate Purple Belt.";
+    }
+    if (q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('greeting')) {
+      return "Hey there! Welcome to Rudra's Desk. Ask me about his professional experience at GrowVora and CoderBoyz, client projects, technical skills, or arcade games!";
+    }
+    if (q.includes('thank') || q.includes('thanks') || q.includes('cool') || q.includes('awesome')) {
+      return "You're very welcome! Let me know if you need any other information, or drop Rudra a message in the Contact section.";
+    }
+    return "I'm Rudra's desk assistant. Ask me about his <strong>experience</strong> at GrowVora and CoderBoyz, <strong>client projects</strong>, <strong>AI skills</strong>, <strong>arcade games</strong>, or <strong>contact info</strong>!";
   }
 
   function handleSend() {
@@ -1888,18 +3207,434 @@ window.addEventListener('scroll', () => {
     if (!val) return;
     addMsg(val, 'user');
     input.value = '';
-    setTimeout(() => addMsg(reply(val), 'bot'), 350);
+    setTimeout(() => addMsg(reply(val), 'bot'), 300);
   }
 
-  send.addEventListener('click', handleSend);
-  input.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
+  if (send) send.addEventListener('click', handleSend);
+  if (input) input.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
+
   chips.forEach(c => c.addEventListener('click', () => {
-    const map = { skills: 'What skills does Rudra have?', projects: 'Show me the projects', contact: 'How do I contact Rudra?' };
+    const map = {
+      skills: 'What skills does Rudra have?',
+      projects: 'Show me your projects',
+      experience: 'Tell me about your professional experience at GrowVora, CoderBoyz, and Coding House',
+      clientwork: 'What client projects have you built?',
+      contact: 'How do I contact Rudra?'
+    };
     const text = map[c.dataset.q] || c.textContent;
     addMsg(text, 'user');
-    setTimeout(() => addMsg(reply(text), 'bot'), 350);
+    setTimeout(() => addMsg(reply(text), 'bot'), 300);
   }));
 })();
+
+/* ════ FEATURE 3, 4, 5: SMART FLOATING POSITIONING ENGINE ════ */
+(function initFloatingWidgets() {
+  const CHAT_KEY = 'rudra_chat_pos_v4';
+  const ARCADE_KEY = 'rudra_arcade_pos_v4';
+  const MARGIN = 16;
+
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatWin = document.getElementById('chat-window');
+  const gamesToggle = document.getElementById('games-toggle');
+  const gamesWin = document.getElementById('games-window');
+  const gameOverlay = document.getElementById('game-overlay');
+
+  if (!chatToggle || !gamesToggle) return;
+
+  const state = {
+    chat: { x: 0, y: 0, el: chatToggle, win: chatWin, storageKey: CHAT_KEY, name: 'chat' },
+    arcade: { x: 0, y: 0, el: gamesToggle, win: gamesWin, storageKey: ARCADE_KEY, name: 'arcade' }
+  };
+
+  function clamp(x, y, w, h) {
+    const maxX = Math.max(MARGIN, window.innerWidth - w - MARGIN);
+    const maxY = Math.max(MARGIN, window.innerHeight - h - MARGIN);
+    return {
+      x: Math.max(MARGIN, Math.min(maxX, x)),
+      y: Math.max(MARGIN, Math.min(maxY, y))
+    };
+  }
+
+  function loadPositions() {
+    const w = 56, h = 56;
+    const defaultChatX = window.innerWidth - w - 28;
+    const defaultChatY = window.innerHeight - h - 28;
+    const defaultArcadeX = window.innerWidth - w - 28;
+    const defaultArcadeY = window.innerHeight - h - 96;
+
+    // Chatbot position
+    try {
+      const saved = JSON.parse(localStorage.getItem(CHAT_KEY));
+      if (saved && typeof saved.rx === 'number' && typeof saved.ry === 'number') {
+        const clamped = clamp(saved.rx * window.innerWidth, saved.ry * window.innerHeight, w, h);
+        state.chat.x = clamped.x;
+        state.chat.y = clamped.y;
+      } else {
+        const clamped = clamp(defaultChatX, defaultChatY, w, h);
+        state.chat.x = clamped.x;
+        state.chat.y = clamped.y;
+      }
+    } catch (_) {
+      state.chat.x = defaultChatX; state.chat.y = defaultChatY;
+    }
+
+    // Arcade position
+    try {
+      const saved = JSON.parse(localStorage.getItem(ARCADE_KEY));
+      if (saved && typeof saved.rx === 'number' && typeof saved.ry === 'number') {
+        const clamped = clamp(saved.rx * window.innerWidth, saved.ry * window.innerHeight, w, h);
+        state.arcade.x = clamped.x;
+        state.arcade.y = clamped.y;
+      } else {
+        const clamped = clamp(defaultArcadeX, defaultArcadeY, w, h);
+        state.arcade.x = clamped.x;
+        state.arcade.y = clamped.y;
+      }
+    } catch (_) {
+      state.arcade.x = defaultArcadeX; state.arcade.y = defaultArcadeY;
+    }
+
+    preventOverlap('chat');
+    applyPosition(state.chat);
+    applyPosition(state.arcade);
+  }
+
+  function preventOverlap(preferred) {
+    const dist = Math.hypot(state.chat.x - state.arcade.x, state.chat.y - state.arcade.y);
+    if (dist < 64) {
+      if (preferred === 'chat') {
+        state.arcade.y = Math.max(MARGIN, state.chat.y - 72);
+        if (state.arcade.y <= MARGIN) state.arcade.y = state.chat.y + 72;
+      } else {
+        state.chat.y = Math.min(window.innerHeight - 56 - MARGIN, state.arcade.y + 72);
+      }
+    }
+  }
+
+  function applyPosition(item) {
+    item.el.style.left = Math.round(item.x) + 'px';
+    item.el.style.top = Math.round(item.y) + 'px';
+    item.el.style.right = 'auto';
+    item.el.style.bottom = 'auto';
+    if (item.win && item.win.classList.contains('open')) {
+      positionWindow(item);
+    }
+  }
+
+  function savePosition(item) {
+    try {
+      const rx = item.x / window.innerWidth;
+      const ry = item.y / window.innerHeight;
+      localStorage.setItem(item.storageKey, JSON.stringify({ rx, ry, x: item.x, y: item.y }));
+    } catch (_) {}
+  }
+
+  function positionWindow(item) {
+    if (!item.win) return;
+    if (window.innerWidth <= 540) {
+      item.win.style.left = '';
+      item.win.style.top = '';
+      item.win.style.right = '';
+      item.win.style.bottom = '';
+      return;
+    }
+
+    const winW = item.win.offsetWidth || (item.name === 'chat' ? 320 : 300);
+    const winH = item.win.offsetHeight || 420;
+    const launcherW = item.el.offsetWidth || 56;
+    const launcherH = item.el.offsetHeight || 56;
+
+    let targetY;
+    if (item.y > winH + 20) {
+      targetY = item.y - winH - 12;
+    } else {
+      targetY = item.y + launcherH + 12;
+    }
+
+    let targetX;
+    if (item.x + launcherW / 2 > window.innerWidth / 2) {
+      targetX = item.x + launcherW - winW;
+    } else {
+      targetX = item.x;
+    }
+
+    const clamped = clamp(targetX, targetY, winW, winH);
+    item.win.style.left = Math.round(clamped.x) + 'px';
+    item.win.style.top = Math.round(clamped.y) + 'px';
+    item.win.style.right = 'auto';
+    item.win.style.bottom = 'auto';
+  }
+
+  function setupDraggableLauncher(item, onToggle) {
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let initialX = 0, initialY = 0;
+    let moved = false;
+    const DRAG_THRESHOLD = 5;
+
+    item.el.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0 && e.pointerType === 'mouse') return;
+      isDragging = true;
+      moved = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      initialX = item.x;
+      initialY = item.y;
+      item.el.setPointerCapture(e.pointerId);
+    });
+
+    item.el.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (!moved && Math.hypot(dx, dy) > DRAG_THRESHOLD) {
+        moved = true;
+        item.el.classList.add('is-dragging');
+      }
+      if (moved) {
+        const clamped = clamp(initialX + dx, initialY + dy, item.el.offsetWidth || 56, item.el.offsetHeight || 56);
+        item.x = clamped.x;
+        item.y = clamped.y;
+        applyPosition(item);
+      }
+    });
+
+    function endDrag(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      item.el.classList.remove('is-dragging');
+      try { item.el.releasePointerCapture(e.pointerId); } catch (_) {}
+
+      if (moved) {
+        preventOverlap(item.name);
+        applyPosition(item);
+        savePosition(item);
+      } else {
+        onToggle();
+      }
+    }
+
+    item.el.addEventListener('pointerup', endDrag);
+    item.el.addEventListener('pointercancel', endDrag);
+
+    // Keyboard controls when launcher is focused
+    item.el.addEventListener('keydown', (e) => {
+      if (gameOverlay && gameOverlay.classList.contains('open')) return;
+
+      const step = (e.shiftKey || e.ctrlKey) ? 36 : 14;
+      let handled = false;
+      if (e.key === 'ArrowUp') { item.y -= step; handled = true; }
+      else if (e.key === 'ArrowDown') { item.y += step; handled = true; }
+      else if (e.key === 'ArrowLeft') { item.x -= step; handled = true; }
+      else if (e.key === 'ArrowRight') { item.x += step; handled = true; }
+      else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onToggle();
+        return;
+      }
+
+      if (handled) {
+        e.preventDefault();
+        const clamped = clamp(item.x, item.y, item.el.offsetWidth || 56, item.el.offsetHeight || 56);
+        item.x = clamped.x;
+        item.y = clamped.y;
+        applyPosition(item);
+        savePosition(item);
+      }
+    });
+  }
+
+  function setupDraggableHeader(item, headerEl) {
+    if (!headerEl) return;
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let initX = 0, initY = 0;
+
+    headerEl.addEventListener('pointerdown', (e) => {
+      if (window.innerWidth <= 540) return;
+      if (e.target.closest('button, a, input, select')) return;
+      if (e.button !== 0 && e.pointerType === 'mouse') return;
+
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      const rect = item.win.getBoundingClientRect();
+      initX = rect.left;
+      initY = rect.top;
+      headerEl.setPointerCapture(e.pointerId);
+      headerEl.style.cursor = 'grabbing';
+    });
+
+    headerEl.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      const clamped = clamp(initX + dx, initY + dy, item.win.offsetWidth, item.win.offsetHeight);
+      item.win.style.left = Math.round(clamped.x) + 'px';
+      item.win.style.top = Math.round(clamped.y) + 'px';
+    });
+
+    function endHeaderDrag(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      headerEl.style.cursor = '';
+      try { headerEl.releasePointerCapture(e.pointerId); } catch (_) {}
+    }
+
+    headerEl.addEventListener('pointerup', endHeaderDrag);
+    headerEl.addEventListener('pointercancel', endHeaderDrag);
+  }
+
+  function resetPositions() {
+    localStorage.removeItem(CHAT_KEY);
+    localStorage.removeItem(ARCADE_KEY);
+    loadPositions();
+    if (chatWin) chatWin.classList.remove('open');
+    if (chatToggle) {
+      chatToggle.classList.remove('open');
+      chatToggle.setAttribute('aria-expanded', 'false');
+    }
+    if (gamesWin) gamesWin.classList.remove('open');
+    if (gamesToggle) {
+      gamesToggle.classList.remove('open');
+      gamesToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    [chatToggle, gamesToggle].forEach(btn => {
+      btn.style.transition = 'transform .4s cubic-bezier(.34,1.56,.64,1)';
+      btn.style.transform = 'scale(1.22)';
+      setTimeout(() => { btn.style.transform = ''; btn.style.transition = ''; }, 400);
+    });
+  }
+
+  // Global keyboard shortcuts
+  window.addEventListener('keydown', (e) => {
+    // When game overlay is active, NEVER intercept game controls
+    if (gameOverlay && gameOverlay.classList.contains('open')) return;
+
+    const tag = document.activeElement ? document.activeElement.tagName : '';
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag) || (document.activeElement && document.activeElement.isContentEditable)) {
+      return;
+    }
+
+    // Escape closes open widget windows
+    if (e.key === 'Escape') {
+      if (chatWin && chatWin.classList.contains('open')) {
+        chatWin.classList.remove('open');
+        chatToggle.classList.remove('open');
+        chatToggle.setAttribute('aria-expanded', 'false');
+      }
+      if (gamesWin && gamesWin.classList.contains('open')) {
+        gamesWin.classList.remove('open');
+        gamesToggle.classList.remove('open');
+        gamesToggle.setAttribute('aria-expanded', 'false');
+      }
+      return;
+    }
+
+    // Ctrl + Arrow Keys / Shift + Ctrl + Arrow Keys for widget movement
+    if (e.ctrlKey && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+      const activeItem = (gamesWin && gamesWin.classList.contains('open')) ? state.arcade : state.chat;
+      const step = e.shiftKey ? 36 : 14;
+      if (e.key === 'ArrowUp') activeItem.y -= step;
+      else if (e.key === 'ArrowDown') activeItem.y += step;
+      else if (e.key === 'ArrowLeft') activeItem.x -= step;
+      else if (e.key === 'ArrowRight') activeItem.x += step;
+
+      const clamped = clamp(activeItem.x, activeItem.y, activeItem.el.offsetWidth || 56, activeItem.el.offsetHeight || 56);
+      activeItem.x = clamped.x;
+      activeItem.y = clamped.y;
+      applyPosition(activeItem);
+      savePosition(activeItem);
+      e.preventDefault();
+      return;
+    }
+
+    if (e.altKey && (e.key === 'c' || e.key === 'C')) {
+      e.preventDefault();
+      toggleChat();
+    } else if (e.altKey && (e.key === 'g' || e.key === 'G')) {
+      e.preventDefault();
+      toggleGames();
+    }
+  });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const w = 56, h = 56;
+      const c1 = clamp(state.chat.x, state.chat.y, w, h);
+      state.chat.x = c1.x; state.chat.y = c1.y;
+      const c2 = clamp(state.arcade.x, state.arcade.y, w, h);
+      state.arcade.x = c2.x; state.arcade.y = c2.y;
+      preventOverlap('chat');
+      applyPosition(state.chat);
+      applyPosition(state.arcade);
+    }, 100);
+  });
+
+  function toggleChat() {
+    const isOpen = chatWin.classList.toggle('open');
+    chatToggle.classList.toggle('open', isOpen);
+    chatToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    if (isOpen) {
+      positionWindow(state.chat);
+      const input = document.getElementById('chatInput');
+      if (input) setTimeout(() => input.focus(), 80);
+    }
+  }
+
+  function toggleGames() {
+    if (window.RudraSFX && window.RudraSFX.unlock) window.RudraSFX.unlock();
+    const isOpen = gamesWin.classList.toggle('open');
+    gamesToggle.classList.toggle('open', isOpen);
+    gamesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    if (window.RudraSFX && window.RudraSFX.click) window.RudraSFX.click();
+    if (isOpen) {
+      positionWindow(state.arcade);
+    }
+  }
+
+  loadPositions();
+  setupDraggableLauncher(state.chat, toggleChat);
+  setupDraggableLauncher(state.arcade, toggleGames);
+
+  const chatHead = chatWin.querySelector('.chat-head');
+  const gamesHead = gamesWin.querySelector('.games-head');
+  setupDraggableHeader(state.chat, chatHead);
+  setupDraggableHeader(state.arcade, gamesHead);
+
+  document.querySelectorAll('.wgt-reset').forEach(btn => btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    resetPositions();
+  }));
+
+  document.querySelectorAll('.chat-min, .chat-close').forEach(btn => btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    chatWin.classList.remove('open');
+    chatToggle.classList.remove('open');
+    chatToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  document.querySelectorAll('.games-min, .games-close').forEach(btn => btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    gamesWin.classList.remove('open');
+    gamesToggle.classList.remove('open');
+    gamesToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  window.RudraFloatingWidgets = {
+    reset: resetPositions,
+    toggleChat,
+    toggleGames,
+    reposition: () => {
+      applyPosition(state.chat);
+      applyPosition(state.arcade);
+    }
+  };
+})();
+
 </script>
 <script>
 /* ════════════════════════════════════════
@@ -1969,7 +3704,7 @@ window.addEventListener('scroll', () => {
       } catch (e) { /* ignore */ }
     }
 
-    return {
+    const sfxExport = {
       chomp:      () => playFile('chomp'),
       hit:        (kind) => playFile((kind || 'pacman') + 'hit'),
       win:        () => playFile('win'),
@@ -1981,6 +3716,8 @@ window.addEventListener('scroll', () => {
       click:      () => playFile('click'),
       unlock,
     };
+    window.RudraSFX = sfxExport;
+    return sfxExport;
   })();
 
   /* ---------- DOM refs ---------- */
@@ -1999,12 +3736,14 @@ window.addEventListener('scroll', () => {
 
   if (!toggle) return; // widget markup not present on this page
 
-  toggle.addEventListener('click', () => {
-    SFX.unlock();
-    win.classList.toggle('open');
-    toggle.classList.toggle('open');
-    SFX.click();
-  });
+  if (!window.RudraFloatingWidgets) {
+    toggle.addEventListener('click', () => {
+      SFX.unlock();
+      win.classList.toggle('open');
+      toggle.classList.toggle('open');
+      SFX.click();
+    });
+  }
 
   document.querySelectorAll('.game-item').forEach(item => {
     item.querySelector('.game-play-btn').addEventListener('click', () => {
